@@ -1,13 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
   <a class="navbar-brand" href="/">{{title}}</a>
-  <div *ngIf="is_signedin">
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active"><button class="btn btn-dark" (click)="doLogout()">Esci</button></li>
-        <li class="nav-item active"><a class="nav-link" [routerLink]="['/cerca']" routerLinkActive="router-link-active">Cerca</a></li>
-        <li class="nav-item active"><a class="nav-link" [routerLink]="['/inserisci']" routerLinkActive="router-link-active">Inserisci</a></li>
+        <li class="nav-item active"><a class="nav-link" [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a></li>
+        <li class="nav-item active"><a class="nav-link" [routerLink]="['/cerca']" routerLinkActive="router-link-active">Ricerca</a></li>
+        <li *ngIf="is_signedin" class="nav-item active"><a class="nav-link" [routerLink]="['/inserisci']" routerLinkActive="router-link-active">Inserisci</a></li>
+        <li *ngIf="is_signedin" class="nav-item active"><button class="btn btn-dark" (click)="doLogout()">Esci</button></li>
       </ul>
       <span class="navbar-text">M. MacGherl@2018 Copyright All Right Reserved.</span>
     </div>
-  </div>
 </nav>

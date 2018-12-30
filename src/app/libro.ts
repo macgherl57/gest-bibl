@@ -1,7 +1,7 @@
 import { Data } from '@angular/router';
 
 export interface Libro {
-    n: number;
+    N: number;
     ISBN: string;
     n_facile_consumo: number;
     n_inventario: number;

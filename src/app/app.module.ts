@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { LibrodetailComponent } from './librodetail/librodetail.component';
+import { LibroeditComponent } from './libroedit/libroedit.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { LibrodetailComponent } from './librodetail/librodetail.component';
     LoginComponent,
     RicercaComponent,
     InserimentoComponent,
-    LibrodetailComponent
+    LibrodetailComponent,
+    LibroeditComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +33,9 @@ import { LibrodetailComponent } from './librodetail/librodetail.component';
     ReactiveFormsModule,
     NgbModalModule
   ],
-  providers: [],
+  providers: [ConfirmationDialogService],
   bootstrap: [AppComponent],
-  entryComponents: [LibrodetailComponent]
+  entryComponents: [LibrodetailComponent, ConfirmationDialogComponent]
 
 })
 export class AppModule { }

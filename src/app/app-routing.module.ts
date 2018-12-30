@@ -4,13 +4,15 @@ import { LoginComponent } from './login/login.component';
 import { RicercaComponent } from './ricerca/ricerca.component';
 import { InserimentoComponent } from './inserimento/inserimento.component';
 import { CanActivateGuard } from './can-activate.guard';
+import { LibroeditComponent } from './libroedit/libroedit.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
-  { path: 'cerca', component: RicercaComponent, canActivate: [CanActivateGuard] },
-  { path: 'inserisci', component: InserimentoComponent, canActivate: [CanActivateGuard] }
+  { path: 'cerca', component: RicercaComponent },
+  { path: 'inserisci', component: InserimentoComponent, canActivate: [CanActivateGuard] },
+  { path: 'edit/:n', component: LibroeditComponent, canActivate: [CanActivateGuard]},
+  { path: '', redirectTo: 'cerca', pathMatch: 'full'},
 ];
 
 @NgModule({

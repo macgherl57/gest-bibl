@@ -10,11 +10,13 @@ import { Libro } from './libro';
 export class ApiService {
 
   constructor(private httpClient: HttpClient, private sessionService: AuthsessService) { }
-  API_URL = 'https://liceoberchet.gov.it:3306';
+  // To be used in production
+  //  API0_URL = 'https://liceoberchet.gov.it:3306';
+  API_URL = 'http://localhost:3000/biblioteca';
   public isUserLoggedIn = new BehaviorSubject<Boolean>(false);
   
   public validate(loginForm: Object) {
-    return this.httpClient.post(`${this.API_URL}/validate`, loginForm);
+    return this.httpClient.post('http://localhost:3000/secrets/validate', loginForm);
   }
   public isSignedIn() {
     return !!this.sessionService.studente_id;
@@ -34,5 +36,8 @@ export class ApiService {
   }
   public getLibroDetail(n: number)  {
     return this.httpClient.get(`${this.API_URL}/libro/` + n);
+  }
+  public editLibro(n: number, editForm: Object) {
+    return this.httpClient.put(`${this.API_URL}/edit/` + n, editForm);
   }
 }

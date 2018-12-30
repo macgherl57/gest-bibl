@@ -55,7 +55,13 @@
   <div class="col">Collocazione</div>
 </div>
 <div class="row text-white bg-dark" *ngFor="let libro of pagedItems">
-  <div class="col text-dark bg-white"><a (click)="openModal(libro.n)"><img [src]="'assets/images/info.png'"></a></div>
+  <div class="col-md-1 text-dark bg-white">
+      <table><tr>
+      <td><a (click)="openModal(libro.N)"><img [src]="'assets/images/info.png'"></a></td>
+      <td><a (click)="openEdit(libro.N)"><img [src]="'assets/images/edit-pencil-icon-20x20.png'"></a></td>
+      <td *ngIf="is_signedin"><a (click)="openConfirmationDialog(libro.N)"><img [src]="'assets/images/delete-20.png'"></a></td>
+    </tr></table>
+  </div>
   <div class="col">{{libro.autore}}</div>
   <div class="col">{{libro.titolo}}</div>
   <div class="col">{{libro.curatore}}</div>
