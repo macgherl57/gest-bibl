@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthsessService } from './authsess.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Libro } from './libro';
@@ -14,6 +14,8 @@ export class ApiService {
   //  API0_URL = 'https://liceoberchet.gov.it:3306';
   API_URL = 'http://localhost:3000/biblioteca';
   public isUserLoggedIn = new BehaviorSubject<Boolean>(false);
+  public libriSearch = new BehaviorSubject<Libro[]>([]);
+  public currentPage = new BehaviorSubject<number>(0);
   
   public validate(loginForm: Object) {
     return this.httpClient.post('http://localhost:3000/secrets/validate', loginForm);
@@ -32,12 +34,15 @@ export class ApiService {
     return this.httpClient.get<Object[]>(`${this.API_URL}/showcolumns`);
   }
   public insertBook(inserimForm: Object) {
-    return this.httpClient.post(`${this.API_URL}/insert`, inserimForm);
+    return this.httpClient.put(`${this.API_URL}/insert`, inserimForm);
   }
   public getLibroDetail(n: number)  {
     return this.httpClient.get(`${this.API_URL}/libro/` + n);
   }
   public editLibro(n: number, editForm: Object) {
     return this.httpClient.put(`${this.API_URL}/edit/` + n, editForm);
+  }
+  public deleteLibro(n: number) {
+    return this.httpClient.delete(`${this.API_URL}/libro/` + n);
   }
 }

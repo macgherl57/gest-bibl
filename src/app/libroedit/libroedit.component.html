@@ -2,7 +2,7 @@
 <form #libroEdit="ngForm" class="" (ngSubmit)="onsubmit(libroEdit.value, libro.N)">
   <div class="form-group" *ngFor="let row of rows">
     <small id="helpId" class="form-text text-muted">{{row}}</small>    
-    <input type="text"
+    <input type="text" [disabled]="row == 'N'"
     id="{{row}}" class="form-control form-control-sm" [name]="row" [(ngModel)]="libro[row]" 
     aria-described-by="helpId"><hr>
   </div>

@@ -24,6 +24,12 @@
         La ricerca non ha prodotto alcun risultato. Prova con un'altra stringa.
     </div>
 </div>
+<div *ngIf="del_error">
+    <div class="alert alert-danger">Il libro non è stato cancellato</div>
+</div>
+<div *ngIf="del_success">
+    <div class="alert alert-success">Il libro è stato cancellato con successo.</div>
+</div>
 <div *ngIf="submitted">
   <div class="alert alert-dark" role="alert">
       La ricerca ha prodotto <strong>{{libri.length}}</strong> volumi.

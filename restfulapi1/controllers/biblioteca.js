@@ -23,7 +23,7 @@ router.get('/search/:keyword', function(req, res) {
     });
 });
 
-router.get('/inserisci', function(req, res) {
+router.put('/insert', function(req, res) {
     biblio.inserisci(req.body, function(error, results, fields) {
         if (error) throw error;
         return res.send({ error: false, data: results, message: 'Everything OK'});
@@ -34,6 +34,13 @@ router.put('/edit/:n', function(req, res){
     biblio.edit(req.body, req.params.n, function(error, results, fields) {
         if (error) throw error;
         return res.send({error: false, data: results, message: 'Libro editato!'})
+    });
+});
+
+router.delete('/libro/:n', function(req, res) {
+    biblio.cancella(req.params.n, function(error, results, fields) {
+        if (error) throw error;
+        return res.send({ error: false, data: results, message: 'Libro cancellato!'})
     });
 });
 

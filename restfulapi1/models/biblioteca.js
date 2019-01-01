@@ -48,3 +48,12 @@ exports.edit = function(body, id, done) {
         done(false, results, fields);
     });
 }
+exports.cancella = function(n, done) {
+    let query = 'DELETE FROM schedario2_copy2 WHERE N=?';
+    db.get().query(query, n, function(error, results, fields) {
+        if (error) {
+            return done(error);
+        }
+        done(false, results, fields);
+    });
+}
