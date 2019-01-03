@@ -9,6 +9,7 @@ import { InserimentoComponent } from './inserimento/inserimento.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { LibrodetailComponent } from './librodetail/librodetail.component';
 import { LibroeditComponent } from './libroedit/libroedit.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
@@ -31,7 +32,8 @@ import { ConfirmationDialogService } from './confirmation-dialog/confirmation-di
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModalModule
+    NgbModalModule,
+    NgbDropdownModule
   ],
   providers: [ConfirmationDialogService],
   bootstrap: [AppComponent],
