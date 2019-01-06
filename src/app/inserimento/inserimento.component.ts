@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Libro } from '../libro';
 import { ApiService } from '../api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthsessService } from '../authsess.service';
@@ -14,11 +13,10 @@ export class InserimentoComponent implements OnInit {
 
   inserimForm: FormGroup;
   private res: Object[];
-  private isFormReady: boolean = false;
   errorMsg: boolean = false;
   successAlert: boolean = false;
 
-  constructor(private apiService: ApiService, private fb: FormBuilder, private au: AuthsessService) { }
+  constructor(private apiService: ApiService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createForm();
@@ -39,7 +37,6 @@ export class InserimentoComponent implements OnInit {
         }
       }
       this.inserimForm = group;
-      this.isFormReady = true;
     });
   }
   onsubmit(form: Object) {
@@ -51,8 +48,5 @@ export class InserimentoComponent implements OnInit {
         this.errorMsg = true;
       }
     });
-  }
-  trackByFn(index: any, item: any) {
-    return index;
   }
 }

@@ -5,6 +5,7 @@ import { RicercaComponent } from './ricerca/ricerca.component';
 import { InserimentoComponent } from './inserimento/inserimento.component';
 import { CanActivateGuard } from './can-activate.guard';
 import { LibroeditComponent } from './libroedit/libroedit.component';
+import { VisualizzaPrestitiComponent } from './visualizza-prestiti/visualizza-prestiti.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'cerca', component: RicercaComponent },
   { path: 'inserisci', component: InserimentoComponent, canActivate: [CanActivateGuard] },
   { path: 'edit/:n', component: LibroeditComponent, canActivate: [CanActivateGuard]},
+  { path: 'prestiti', component: VisualizzaPrestitiComponent, canActivate: [CanActivateGuard]},
   { path: '', redirectTo: 'cerca', pathMatch: 'full'},
 ];
 

@@ -14,6 +14,7 @@ import { LibrodetailComponent } from './librodetail/librodetail.component';
 import { LibroeditComponent } from './libroedit/libroedit.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
+import { VisualizzaPrestitiComponent } from './visualizza-prestiti/visualizza-prestiti.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ConfirmationDialogService } from './confirmation-dialog/confirmation-di
     InserimentoComponent,
     LibrodetailComponent,
     LibroeditComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    VisualizzaPrestitiComponent
   ],
   imports: [
     BrowserModule,

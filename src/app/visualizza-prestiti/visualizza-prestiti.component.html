@@ -1,0 +1,26 @@
+<h3 class="mt-lg-5">
+  Storico prestiti non restituiti (a.s. 2018-2019)
+</h3>
+<hr>
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Tipologia</th>
+            <th scope="col">Cognome Nome</th>
+            <th scope="col">Autore</th>
+            <th scope="col">Titolo</th>
+            <th scope="col">Collocazione</th>
+            <th scope="col">Data Prelievo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of data">
+            <th scope="row">{{ row['all_ana_stud'] != null ? row['all_ana_stud']['cl'] : row['ana_prof']['id'] > 30000 ? 'Ata' : 'Docente'}}</th>
+            <td>{{ row['ana_prof'] == null ? row['all_ana_stud']['cogn_nome'] : row['ana_prof']['cogn'] + ' ' + row['ana_prof']['nome']}}</td>
+            <td>{{ row['Schedario']['autore']}}</td>
+            <td>{{ row['Schedario']['titolo']}}</td>
+            <td>{{ row['Schedario']['collocazione']}}</td>
+            <td>{{ row['prelevato'] }}</td>
+          </tr>
+        </tbody>
+</table>

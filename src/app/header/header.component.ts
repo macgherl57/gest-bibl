@@ -24,4 +24,7 @@ export class HeaderComponent implements OnInit {
     this.apiService.isUserLoggedIn.next(false);
     this._route.navigate(['login']);
   }
+  public openPage() {
+    this._route.navigate(['prestiti']);
+  }
 }
