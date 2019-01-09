@@ -1,0 +1,33 @@
+<h4 class="mt-lg-4">Modifica/Aggiorna Prestito</h4>
+<div class="alert alert-success" role="alert" *ngIf="updateMsg">
+  <strong>Prestito modificato con Successo!</strong>
+</div>
+<div *ngIf="isFormReady">
+<form #modPrestForm="ngForm" class="form" (ngSubmit)="onsubmit(modPrestForm.value)">
+  <div class="form-group">
+    <small id="helpId" class="text-muted">Tipologia</small>
+    <input type="text" [(ngModel)]="tipologia" name="tipologia" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">Cognome e Nome</small>
+    <input type="text" [(ngModel)]="cognome_e_nome" class="form-control form-control-sm" name="student_id" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">Autore</small>
+    <input type="text" [(ngModel)]="Schedario['autore']" name="autore" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">Titolo</small>
+    <input type="text" [(ngModel)]="Schedario['titolo']" name= "titolo" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">Prelevato</small>
+    <input type="text" [(ngModel)]="row.prestito.data_prelievo" name="data_prelievo" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">Data 1° rinn.</small>
+    <input type="text" [(ngModel)]="row.prestito.data_1_rinnovo" name="data_1_rinnovo" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">Data 2° rinn.</small>
+    <input type="text" [(ngModel)]="row.prestito.data_2_prelievo" name="data_2_rinnovo" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">Restituito</small>
+    <input type="text" [(ngModel)]="row.prestito.data_restituzione" name="data_restituzione" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">1° sollecito</small>
+    <input type="text" [(ngModel)]="row.prestito.data_1_soll" name="data_1_soll" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">2° sollecito</small>
+    <input type="text" [(ngModel)]="row.prestito.data_2_soll" name="data_2_soll" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">Note</small>
+    <input type="text" [(ngModel)]="row.prestito.note" name="note" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
+  </div>
+  <button type="submit" role="button" class="bnt btn-dark" >Salva</button>
+</form>
+</div>

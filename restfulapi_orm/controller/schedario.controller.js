@@ -8,13 +8,13 @@ const AnaProf = db.ana_profs;
 
 exports.findByN = (req, res) => {
     Schedario.findByPk(req.params.n).then(libro => {
-        res.json(libro);
+        res.send(libro);
     })
 };
 exports.cerca = (req, res) => {
     Schedario.findAll({
         where: {
-            [op.or]: [{autore: {[op.like]: '%' + req.params.keyword + '%'}}, {titolo: {[op.like]: '%' + req.params.keyword + '%'}}]
+            [op.or]: [{autore: {[op.like]: '%' + req.params.keyword + '%'}}, {titolo: {[op.like]: '%' + req.params.keyword + '%'}}, {collocazione: req.params.collocazione}]
         }
     }).then(libri => {
         res.send(libri);
@@ -35,7 +35,7 @@ exports.inserisci = (req, res) => {
 exports.modifica = (req, res) => {
     let body = req.body;
     let n = req.params.n;
-    Schedario.update(body, { where: { N: n} }).then(result => {
+    Schedario.update(body, { where: {N: n} }).then(result => {
         res.send({ error: false, data: result, message: 'Libro editato!' });
     })
 };
@@ -50,22 +50,46 @@ exports.cancella = (req, res) => {
 exports.prestiti = (req, res) => {
     Prestito.findAll({
         include: [{
-            model: AllAna,
-            attributes: ['cogn_nome','cl','tel']
+            model: AllAna, as: 'Student',
+            attributes: ['id', 'cogn_nome','cl','tel']
         },
         {
-            model: AnaProf,
+            model: AnaProf, as: 'Prof',
             attributes: ['id','cogn','nome'],
         },
         {
             model: Schedario, as: 'Schedario',
-            attributes: ['autore', 'titolo', 'collocazione'],
+            attributes: ['N', 'autore', 'titolo', 'collocazione'],
         }],
-        attributes: [['data_prelievo','prelevato']],
+        attributes: ['id', ['data_prelievo','prelevato']],
         where: {
             data_restituzione: null,
         },
     }).then(prestiti => {
         res.send(prestiti);
+    })
+};
+exports.prestito = (req, res) => {
+    let id = req.params.id;
+    
+    Prestito.findByPk(id).then(prestito => {
+        prestito.getProf({ attributes: ['id','cogn','nome'] }).then(ana_prof => {
+            if (ana_prof != null) {
+                res.send({Prof: ana_prof, prestito: prestito})
+            }
+        });
+        prestito.getStudent({ attributes: ['id','cl','cogn_nome']}).then(all_ana_studs => {
+            if (all_ana_studs != null) {
+                res.send({Studente: all_ana_studs, prestito: prestito});
+            }
+        });
+        return;
+    })
+};
+exports.modprestito = (req, res) => {
+    let id = req.params.id;
+    let body = req.body;
+    Prestito.update(body, { where: {id: id} }).then(result => {
+        res.send({ error: false, data: result, message: 'Prestito editato!' });
     })
 };

@@ -7,4 +7,6 @@ module.exports = function(app) {
     app.put('/biblioteca/edit/:n', schedario.modifica);
     app.delete('/biblioteca/edit/:n', schedario.cancella);
     app.get('/biblioteca/prestiti', schedario.prestiti);
+    app.get('/biblioteca/prestito/:id', schedario.prestito);
+    app.put('/biblioteca/prestito/:id', schedario.modprestito);
 }

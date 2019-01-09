@@ -60,7 +60,10 @@ db.schedario = require('../models/schedario2_copy2.js')(sequelize1, Sequelize);
 db.all_ana_studs = require('../models/all_ana_studs.js')(sequelize, Sequelize);
 db.ana_profs = require('../models/ana_profs.js')(sequelize, Sequelize);
 db.profs_access = require('../models/profs_access.js')(sequelize2, Sequelize);
-db.prestito.belongsTo(db.all_ana_studs, { foreignKey: 'student_id' });
-db.prestito.belongsTo(db.ana_profs, { foreignKey: 'student_id' });
+db.classi = require('../models/classi.js')(sequelize, Sequelize);
+
+db.prestito.belongsTo(db.all_ana_studs, { as: 'Student', foreignKey: 'student_id' });
+db.prestito.belongsTo(db.ana_profs, { as: 'Prof', foreignKey: 'student_id' });
 db.prestito.belongsTo(db.schedario, { as: 'Schedario', foreignKey: 'book_id' });
+db.classi.hasMany(db.all_ana_studs, { as: 'Students' });
 module.exports = db;

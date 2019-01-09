@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthsessService } from './authsess.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Libro } from './libro';
+import { Libro, Prestito, PrestitoRow, RetrievedRow } from './libro';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +10,13 @@ import { Libro } from './libro';
 export class ApiService {
 
   constructor(private httpClient: HttpClient, private sessionService: AuthsessService) { }
+  
   API_URL = 'http://localhost:3000/biblioteca';
   public isUserLoggedIn = new BehaviorSubject<Boolean>(false);
   public libriSearch = new BehaviorSubject<Libro[]>([]);
   public currentPage = new BehaviorSubject<number>(0);
-  
+  public schedarioSave = new BehaviorSubject<Prestito[]>([]);
+
   public validate(loginForm: Object) {
     return this.httpClient.post(`${this.API_URL}/validate`, loginForm);
   }
@@ -44,6 +46,12 @@ export class ApiService {
     return this.httpClient.delete(`${this.API_URL}/libro/` + n);
   }
   public getUnretLoans() {
-    return this.httpClient.get<Object[]>(`${this.API_URL}/prestiti`);
+    return this.httpClient.get<Prestito[]>(`${this.API_URL}/prestiti`);
+  }
+  public getPrestito(id: number) {
+    return this.httpClient.get<RetrievedRow>(`${this.API_URL}/prestito/` + id);
+  }
+  public modPrestito(id: number, row: PrestitoRow) {
+    return this.httpClient.put<PrestitoRow>(`${this.API_URL}/prestito/` + id, row);
   }
 }

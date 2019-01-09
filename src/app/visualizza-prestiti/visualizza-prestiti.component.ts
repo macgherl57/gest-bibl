@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Prestito } from '../libro';
 
 @Component({
   selector: 'app-visualizza-prestiti',
@@ -8,17 +9,24 @@ import { ApiService } from '../api.service';
 })
 export class VisualizzaPrestitiComponent implements OnInit {
 
-  public data: Array<Object>;
+  public data: Array<Prestito>;
+
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.getPrestiti();
+    this.apiService.schedarioSave.subscribe(w => {
+      if (w.length > 0) {
+        this.data = w;
+      } else {
+        this.getPrestiti();
+      }
+    })
   }
 
     public getPrestiti() {
-      this.apiService.getUnretLoans().subscribe(res => {
+      this.apiService.getUnretLoans().subscribe((res: Prestito[]) => {
         this.data = res;
-        console.log(this.data);
+        this.apiService.schedarioSave.next(res);
       });
     }
 }

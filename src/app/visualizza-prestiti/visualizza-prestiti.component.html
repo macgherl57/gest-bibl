@@ -14,13 +14,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of data">
-            <th scope="row">{{ row['all_ana_stud'] != null ? row['all_ana_stud']['cl'] : row['ana_prof']['id'] > 30000 ? 'Ata' : 'Docente'}}</th>
-            <td>{{ row['ana_prof'] == null ? row['all_ana_stud']['cogn_nome'] : row['ana_prof']['cogn'] + ' ' + row['ana_prof']['nome']}}</td>
-            <td>{{ row['Schedario']['autore']}}</td>
-            <td>{{ row['Schedario']['titolo']}}</td>
-            <td>{{ row['Schedario']['collocazione']}}</td>
-            <td>{{ row['prelevato'] }}</td>
+          <tr *ngFor="let row of data; let i = index">
+            <th scope="row">{{ row.Student != null ? row.Student.cl : row.Prof.id > 30000 ? 'Ata' : 'Docente' }}</th>
+            <td>{{ row.Prof == null ? row.Student.cogn_nome : row.Prof.cogn + ' ' + row.Prof.nome }}</td>
+            <td>{{ row.Schedario.autore }}</td>
+            <td>{{ row.Schedario.titolo }}</td>
+            <td><a routerLink="/modprestito/{{row.id}}/{{i}}" class="link">{{ row.Schedario.collocazione }}</a></td>
+            <td>{{ row.prelevato }}</td>
           </tr>
         </tbody>
 </table>

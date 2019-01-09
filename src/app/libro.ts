@@ -24,3 +24,30 @@ export interface Libro {
     titolo: string;
     traduzione_da: string;
 }
+
+export interface Prestito {
+    id: number;
+    prelevato: string;
+    Student: object;
+    Prof: object;
+    Schedario: object;
+}
+
+export interface PrestitoRow {
+    id: number;
+    student_id: number;
+    book_id: number;
+    data_prelievo: Date;
+    data_1_rinnovo: Date;
+    data_2_rinnovo: Date;
+    data_restituzione: Date;
+    data_1_soll: Date;
+    data_2_soll: Date;
+    note: string;
+}
+
+export interface RetrievedRow {
+    Studente?: Object;
+    prestito: Object;
+    Prof?: Object;
+}
