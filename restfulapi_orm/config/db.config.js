@@ -65,5 +65,5 @@ db.classi = require('../models/classi.js')(sequelize, Sequelize);
 db.prestito.belongsTo(db.all_ana_studs, { as: 'Student', foreignKey: 'student_id' });
 db.prestito.belongsTo(db.ana_profs, { as: 'Prof', foreignKey: 'student_id' });
 db.prestito.belongsTo(db.schedario, { as: 'Schedario', foreignKey: 'book_id' });
-db.classi.hasMany(db.all_ana_studs, { as: 'Students' });
+db.classi.hasMany(db.all_ana_studs, { as: 'Students', foreignKey: 'cl' });
 module.exports = db;

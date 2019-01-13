@@ -54,4 +54,10 @@ export class ApiService {
   public modPrestito(id: number, row: PrestitoRow) {
     return this.httpClient.put<PrestitoRow>(`${this.API_URL}/prestito/` + id, row);
   }
+  public getClassi() {
+    return this.httpClient.get<string[]>(`${this.API_URL}/classi`);
+  }
+  public getPersone(cl: string) {
+    return this.httpClient.get<Object[]>(`${this.API_URL}/cognomenome/` + cl);
+  }
 }

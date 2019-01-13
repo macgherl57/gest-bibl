@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RetrievedRow, PrestitoRow } from '../libro';
+import  * as moment  from 'moment';
 
 @Component({
   selector: 'app-modifica-prestito',
@@ -22,11 +23,18 @@ export class ModificaPrestitoComponent implements OnInit {
     this.getPrestito();
   }
 
+  public formatDate() {
+    let date = moment(this.row.prestito['data_prelievo']);
+    let str = date.format('DD/MM/YYYY').toString();
+    console.log(str);
+  }
+
   public getPrestito() {
     let id = +this._router.snapshot.paramMap.get('id');
     let i = +this._router.snapshot.paramMap.get('i');
     this.apiService.getPrestito(id).subscribe(data => {
       this.row = data;
+      this.row.prestito['data_prelievo'] = moment(this.row.prestito['data_prelievo']).format('DD/MM/YYYY').toString();
       if (data.Studente != null) {
         this.cognome_e_nome = data.Studente['cogn_nome'];
         this.tipologia = data.Studente['cl'];

@@ -15,7 +15,7 @@ exports.validate = (req, res) => {
         if (result != null) {
             res.send({ error: false, data: result, message: 'Everything OK'});
         } else {
-            res.send({ error: true, id: 0, message: 'Authentication failure'});
+            res.send({ error: true, data: {id: 0}, message: 'Authentication failure'});
         }
     })
 };

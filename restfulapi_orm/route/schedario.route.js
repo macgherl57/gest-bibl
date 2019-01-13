@@ -9,4 +9,6 @@ module.exports = function(app) {
     app.get('/biblioteca/prestiti', schedario.prestiti);
     app.get('/biblioteca/prestito/:id', schedario.prestito);
     app.put('/biblioteca/prestito/:id', schedario.modprestito);
+    app.get('/biblioteca/classi', schedario.classi);
+    app.get('/biblioteca/cognomenome/:cl', schedario.cognomenome);
 }

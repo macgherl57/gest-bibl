@@ -21,7 +21,7 @@ export class LibrodetailComponent implements OnInit {
   
   getLibro(): void {
     this.apiService.getLibroDetail(this.n).subscribe(data => {
-      this.libro = data["data"];
+      this.libro = data;
       this.rows = Object.keys(this.libro);
       this.rows.sort();
     });

@@ -53,7 +53,7 @@ export class RicercaComponent implements OnInit {
       if (this.libri.length > 0) {
         this.submitted = true;
         this.setPage(1);
-        // console.log(this.libri[0].N);
+        console.log(this.libri[0].N);
         this.apiService.libriSearch.next(this.libri);
         this.del_success = false;
       } else {

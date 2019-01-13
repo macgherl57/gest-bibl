@@ -1,0 +1,41 @@
+<h3 class="mt-lg-3">Inserimento nuovo prestito</h3>
+<form class="form" #insprestForm="ngForm">
+  <div class="form-group">
+    <label for="classe">Classe</label>
+    <select [(ngModel)]="classe" (change)="getPersone()" class="form-control" name="classe" id="classe" #req="ngModel" required>
+      <option *ngFor="let cl of arr" [value]="cl">{{cl}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="cognome_nome">Cognome e Nome</label>
+    <select [(ngModel)]="persona" class="form-control" name="cognome_nome" id="cognome_nome" #cogn_nome="ngModel" required>
+      <option *ngFor="let pers of personae" [value]="pers['id']">{{ pers['cogn'] ? pers['cogn'] + ' ' + pers['nome'] : pers['cogn_nome']}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="autore">Autore</label>
+    <input [ngModel]="libro.autore" [disabled]="libro.autore" type="text" name="autore" id="autore" class="form-control" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">autore</small>
+  </div>
+  <div class="form-group">
+    <label for="titolo">Titolo</label>
+    <input [ngModel]="libro.titolo" [disabled]="libro.titolo" type="text" name="titolo" id="titolo" class="form-control" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">titolo</small>
+  </div>
+  <div class="form-group">
+    <label for="collocazione">Collocazione</label>
+    <input [ngModel]="libro.collocazione" [disabled]="libro.collocazione" type="text" name="collocazione" id="collocazione" class="form-control" placeholder="" aria-describedby="helpId">
+    <small id="helpId" class="text-muted">collocazione</small>
+  </div>
+  <div class="form-group">
+    <label for="data_prelievo">Data Prelievo</label>
+    <input [(ngModel)]="libro.data_prelievo" type="text" name="data_prelievo" id="data_prelievo" class="form-control" placeholder="" aria-describedby="helpId" #data="ngModel" required>
+    <small id="helpId" class="text-muted">data prelievo</small>
+  </div>
+  <div *ngIf="!insprestForm.valid else showSubmitButton">
+      <button type="submit" class="btn btn-lg btn-dark" disabled>Inserisci</button>
+  </div>
+    <ng-template #showSubmitButton>
+      <button type="submit" class="btn btn-lg btn-dark">Inserisci</button>
+    </ng-template>
+</form>

@@ -22,7 +22,7 @@ export class LibroeditComponent implements OnInit {
   public getLibro() {
     this.n = +this.activatedRoute.snapshot.paramMap.get('n');
     this.apiService.getLibroDetail(this.n).subscribe(data => {
-      this.libro = data["data"];
+      this.libro = data;
       this.rows = Object.keys(this.libro);
       this.rows.sort();
     });

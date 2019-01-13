@@ -8,7 +8,7 @@
         <input type="text" name="username"  class="form-control" id="username" placeholder="Nome Utente" #username="ngModel" autofocus required ngModel>
     </div>
     <div class="alert alert-danger" role="alert" *ngIf="username.invalid && (username.dirty || username.touched)">
-     Lo username non può essere nullo!
+     <div *ngIf="username.errors.required">Lo username non può essere nullo!</div>
    </div>
  <div class="form-group">
   <label for="password">Password:</label>

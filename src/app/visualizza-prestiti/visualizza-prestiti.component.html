@@ -20,7 +20,7 @@
             <td>{{ row.Schedario.autore }}</td>
             <td>{{ row.Schedario.titolo }}</td>
             <td><a routerLink="/modprestito/{{row.id}}/{{i}}" class="link">{{ row.Schedario.collocazione }}</a></td>
-            <td>{{ row.prelevato }}</td>
+            <td>{{ row.prelevato | date: 'dd/MM/yyyy' }}</td>
           </tr>
         </tbody>
 </table>

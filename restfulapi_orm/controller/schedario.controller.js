@@ -5,7 +5,7 @@ const op = Sequelize.Op;
 const Prestito = db.prestito;
 const AllAna = db.all_ana_studs;
 const AnaProf = db.ana_profs;
-
+const Classi = db.classi;
 exports.findByN = (req, res) => {
     Schedario.findByPk(req.params.n).then(libro => {
         res.send(libro);
@@ -71,7 +71,6 @@ exports.prestiti = (req, res) => {
 };
 exports.prestito = (req, res) => {
     let id = req.params.id;
-    
     Prestito.findByPk(id).then(prestito => {
         prestito.getProf({ attributes: ['id','cogn','nome'] }).then(ana_prof => {
             if (ana_prof != null) {
@@ -92,4 +91,37 @@ exports.modprestito = (req, res) => {
     Prestito.update(body, { where: {id: id} }).then(result => {
         res.send({ error: false, data: result, message: 'Prestito editato!' });
     })
+};
+exports.classi = (req, res) => {
+    Classi.findAll().then(classi => {
+        let classarr = [];
+        classi.forEach(element => {
+            classarr.push(element['class']);
+        });
+        res.send(classarr);
+    })
+};
+exports.cognomenome = (req, res) => {
+    let cl = req.params.cl;
+    if (cl === 'Docente') {
+        AnaProf.findAll({
+            attributes: ['id','cogn','nome'],
+            where: { id: {[op.lt]: 30000} }
+        }).then(ana_profs => {
+            res.send(ana_profs);
+        })
+    } else if (cl === 'Personale Ata') {
+        AnaProf.findAll({
+            attributes: ['id','cogn','nome'],
+            where: { id: {[op.gte]: 30000} }
+        }).then(ana_profs => {
+            res.send(ana_profs);
+        })
+    } else {
+        Classi.findByPk(cl).then(classe =>{
+            classe.getStudents({ attributes: ['id','cogn_nome']}).then(all_ana_studs => {
+                res.send(all_ana_studs);
+            });
+        });
+    }
 };
