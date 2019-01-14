@@ -14,7 +14,11 @@ exports.findByN = (req, res) => {
 exports.cerca = (req, res) => {
     Schedario.findAll({
         where: {
-            [op.or]: [{autore: {[op.like]: '%' + req.params.keyword + '%'}}, {titolo: {[op.like]: '%' + req.params.keyword + '%'}}, {collocazione: req.params.collocazione}]
+            [op.or]: [
+                {autore: {[op.regexp]: '[[:<:]]' + req.params.keyword + '[[:>:]]'}},
+                {titolo: {[op.regexp]: '[[:<:]]' + req.params.keyword + '[[:>:]]'}},
+                {collocazione: req.params.keyword}
+            ]
         }
     }).then(libri => {
         res.send(libri);
@@ -29,6 +33,12 @@ exports.colonne = (req, res) => {
 exports.inserisci = (req, res) => {
     let body = req.body;
     Schedario.create(body) .then(result => {
+        res.send({ error: false, data: result, message: 'Everything OK' });
+    })
+};
+exports.insprest = (req, res) => {
+    let body = req.body;
+    Prestito.create(body) .then(result => {
         res.send({ error: false, data: result, message: 'Everything OK' });
     })
 };

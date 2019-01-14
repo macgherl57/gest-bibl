@@ -37,9 +37,9 @@ export class ApiService {
     return this.httpClient.post(`${this.API_URL}/insert`, inserimForm);
   }
   public getLibroDetail(n: number)  {
-    return this.httpClient.get(`${this.API_URL}/libro/` + n);
+    return this.httpClient.get<Libro>(`${this.API_URL}/libro/` + n);
   }
-  public editLibro(n: number, editForm: Object) {
+  public editLibro(n: number, editForm: Libro) {
     return this.httpClient.put(`${this.API_URL}/edit/` + n, editForm);
   }
   public deleteLibro(n: number) {
@@ -59,5 +59,8 @@ export class ApiService {
   }
   public getPersone(cl: string) {
     return this.httpClient.get<Object[]>(`${this.API_URL}/cognomenome/` + cl);
+  }
+  public insPrest(prestitoRow: PrestitoRow) {
+    return this.httpClient.post(`${this.API_URL}/insprest`, prestitoRow);
   }
 }

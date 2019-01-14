@@ -52,13 +52,18 @@ export class ModificaPrestitoComponent implements OnInit {
     id: this.row.prestito['id'],
     student_id: this.row.prestito['student_id'],
     book_id: this.row.prestito['book_id'],
-    data_prelievo: this.row.prestito['data_prelievo'],
+    data_prelievo: moment(this.row.prestito['data_prelievo'], 'DD/MM/YYYY').toDate(),
     data_1_rinnovo: this.row.prestito['data_1_rinnovo'],
     data_2_rinnovo: this.row.prestito['data_2_rinnovo'],
     data_restituzione: this.row.prestito['data_restituzione'],
     data_1_soll: this.row.prestito['data_1_soll'],
     data_2_soll: this.row.prestito['data_2_soll'],
     note: this.row.prestito['note']
+    }
+    if (this.row.prestito['data_restituzione'] != null) {
+      // write the code to call .next on the schedarioSave Behavior Subject
+      // for example write again the code in inserisci-prestito.component 40 foll.
+      // and then navigate to 'prestiti'
     }
     this.apiService.modPrestito(newPrestitoRow.id, newPrestitoRow).subscribe(result => {
       if (!result['error']) {

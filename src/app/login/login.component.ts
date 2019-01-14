@@ -18,13 +18,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-  public validate(loginForm) {
+
+   public validate(loginForm) {
     this.apiService.validate(loginForm).subscribe(res => {
       this.studente_id = res['data']['id'];
       if (this.studente_id > 0) {
         this.sessionService.studente_id = this.studente_id;
         this.sessionService.username = loginForm.username;
         this.apiService.isUserLoggedIn.next(true);
+        this.apiService.libriSearch.next([]);
+        this.apiService.schedarioSave.next([]);
         this.router.navigate(['cerca']);
       } else {
         this.error = true;

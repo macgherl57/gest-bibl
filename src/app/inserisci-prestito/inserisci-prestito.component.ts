@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Libro } from '../libro';
-import { ActivatedRoute} from '@angular/router';
+import { Libro, PrestitoRow, Prestito } from '../libro';
+import { ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-inserisci-prestito',
@@ -16,36 +16,82 @@ export class InserisciPrestitoComponent implements OnInit {
   persone: Object[];
   libro: Libro;
   libri: Libro[];
-  
+  displayMsg: boolean = false;
+  n: number;
+  index: number;
+  prestito_id: number;
+  allPrest: Array<Prestito> = [];
+
   get personae(): Object[] {
     return this.persone;
   }
 
-  constructor(private apiservice: ApiService, private router: ActivatedRoute) { }
+  constructor(private apiservice: ApiService, private router: ActivatedRoute, private _router: Router) { }
 
   ngOnInit() {
+    this.n = +this.router.snapshot.paramMap.get('n');
+    console.log('inside ngOninit(): n = :'+this.n);
+    this.checkIfPrestito();
+    this.populateSelect();
+    this.getLibroData();
+  }
+  
+  public checkIfPrestito() {
+    this.apiservice.getUnretLoans().subscribe(res => { 
+      this.allPrest = res;
+      console.log('Inside checkIfPrestito: ' + this.allPrest.length + ' n= ' + this.n);
+      this.allPrest.forEach((obj, i) => {
+        if (obj.Schedario['N'] === this.n) {
+          this.index = i;
+          this.prestito_id = obj.id;
+          this.displayMsg = true;
+        }
+      });
+      console.log('Length inside checkIf...: ' + this.allPrest.length);
+      this.apiservice.schedarioSave.next(this.allPrest);
+    });
+  }
+  public populateSelect() {
     this.apiservice.getClassi().subscribe(res => {
       this.arr.push('Docente','Personale Ata');
       res.forEach(el => {
         this.arr.push(el);
       });
     });
-    this.getLibroData();
   }
-  
   public getPersone() {
     this.apiservice.getPersone(this.classe).subscribe(res => {
       this.persone = res;
       });
   }
-
   public getLibroData() {
-    let n = +this.router.snapshot.paramMap.get('n');
+    console.log('Inside get Libro: '+this.n);
     this.apiservice.libriSearch.subscribe(res => { this.libri = res });
     this.libri.forEach(l => {
-      if (l.N === n ) {
+      if (l.N === this.n ) {
         this.libro = l;
+        console.log('Questo libro: ', this.libro);
       }
-    })
+    });
+  }
+  public onsubmit(insprestForm) {
+    console.log('Form object: ', insprestForm);
+    let newPrestitoRow: PrestitoRow = {
+      id: null,
+      student_id: insprestForm['cognome_nome'],
+      book_id: this.libro.N,
+      data_prelievo: insprestForm['data_prelievo'],
+      data_1_rinnovo: null,
+      data_2_rinnovo: null,
+      data_restituzione: null,
+      data_1_soll: null,
+      data_2_soll: null,
+      note: null
+    }
+    this.apiservice.insPrest(newPrestitoRow).subscribe(res => {
+      if (!res['error']) {
+        this._router.navigate(['prestiti']);
+      }
+    });
   }
 }

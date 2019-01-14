@@ -12,7 +12,7 @@
     <small id="helpId" class="form-text text-muted">Il testo può essere sia relativo a un autore sia a un titolo.</small>
   </div>
   <div *ngIf="!ricercaForm.valid else showSubmitButton">
-        <button type="submit" class="btn btn-lg btn-dark" disabled>Cerca</button>
+        <button type="submit" class="btn btn-lg btn-dark mr-2" disabled>Cerca</button>
       </div>
       <ng-template #showSubmitButton>
         <button type="submit" class="btn btn-lg btn-dark">Cerca</button>
@@ -36,19 +36,19 @@
   </div>
   <ul *ngIf="pager.pages && pager.pages.length > 1" class="pagination justify-content-center">
         <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-            <a (click)="setPage(1)" class="page-link">First</a>
+            <a (click)="setPage(1)" class="page-link">Inizio</a>
         </li>
         <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-            <a (click)="setPage(pager.currentPage - 1)" class="page-link">Previous</a>
+            <a (click)="setPage(pager.currentPage - 1)" class="page-link">Precedente</a>
         </li>
         <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
             <a (click)="setPage(page)" class="page-link">{{page}}</a>
         </li>
         <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
-            <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
+            <a (click)="setPage(pager.currentPage + 1)" class="page-link">Prossimo</a>
         </li>
         <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
-            <a (click)="setPage(pager.totalPages)" class="page-link">Last</a>
+            <a (click)="setPage(pager.totalPages)" class="page-link">Ultimo</a>
         </li>
     </ul>
   <div class="row text-dark bg-white">
@@ -62,10 +62,10 @@
 </div>
 <div class="row text-white bg-dark" *ngFor="let libro of pagedItems">
   <div class="col-md-2 text-dark bg-white">
-      <a (click)="openModal(libro.N)"><img [src]="'assets/images/info.png'"></a>
-      <a (click)="openEdit(libro.N)"><img [src]="'assets/images/edit-pencil-icon-20x20.png'"></a>
-      <a *ngIf="is_signedin" (click)="openConfirmationDialog(libro.N)"><img [src]="'assets/images/delete-20.png'"></a>
-      <a *ngIf="is_signedin" routerLink="/insprestito/{{libro.N}}"><img [src]="'assets/images/prestito.png'"></a>
+      <a (click)="openModal(libro.N)" placement="top" ngbTooltip="dettagli libro"><img [src]="'assets/images/info-icon.png'" class="mr-2"></a>
+      <a (click)="openEdit(libro.N)"><img [src]="'assets/images/edit-icon.png'" placement="top" ngbTooltip="modifica libro" class="mr-2"></a>
+      <a *ngIf="is_signedin" (click)="openConfirmationDialog(libro.N)"><img [src]="'assets/images/delete-icon.png'" ngbTooltip="elimina libro" class="mr-2"></a>
+      <a *ngIf="is_signedin" routerLink="/insprestito/{{libro.N}}"><img [src]="'assets/images/lend-icon.png'" ngbTooltip="prestito libro" class="mr-2"></a>
   </div>
   <div class="col">{{libro.autore}}</div>
   <div class="col">{{libro.titolo}}</div>
@@ -76,19 +76,19 @@
 </div>
   <ul *ngIf="pager.pages && pager.pages.length > 1" class="pagination justify-content-center">
     <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-        <a (click)="setPage(1)" class="page-link">First</a>
+        <a (click)="setPage(1)" class="page-link">Inizio</a>
     </li>
     <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-        <a (click)="setPage(pager.currentPage - 1)" class="page-link">Previous</a>
+        <a (click)="setPage(pager.currentPage - 1)" class="page-link">Precedente</a>
     </li>
     <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
         <a (click)="setPage(page)" class="page-link">{{page}}</a>
     </li>
     <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
-        <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
+        <a (click)="setPage(pager.currentPage + 1)" class="page-link">Prossimo</a>
     </li>
     <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
-        <a (click)="setPage(pager.totalPages)" class="page-link">Last</a>
+        <a (click)="setPage(pager.totalPages)" class="page-link">Ultimo</a>
     </li>
 </ul>
 </div>

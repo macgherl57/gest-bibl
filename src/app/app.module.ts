@@ -8,8 +8,7 @@ import { RicercaComponent } from './ricerca/ricerca.component';
 import { InserimentoComponent } from './inserimento/inserimento.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { LibrodetailComponent } from './librodetail/librodetail.component';
 import { LibroeditComponent } from './libroedit/libroedit.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
@@ -39,7 +38,8 @@ import { InserisciPrestitoComponent } from './inserisci-prestito/inserisci-prest
     FormsModule,
     ReactiveFormsModule,
     NgbModalModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    NgbTooltipModule
   ],
   providers: [ConfirmationDialogService],
   bootstrap: [AppComponent],

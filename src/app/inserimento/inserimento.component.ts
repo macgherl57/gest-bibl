@@ -11,10 +11,11 @@ import { AuthsessService } from '../authsess.service';
 })
 export class InserimentoComponent implements OnInit {
 
-  inserimForm: FormGroup;
-  private res: Object[];
-  errorMsg: boolean = false;
-  successAlert: boolean = false;
+  public inserimForm: FormGroup;
+  public res: Object[];
+  public errorMsg: boolean = false;
+  public successAlert: boolean = false;
+  public isFormReady: boolean = false;
 
   constructor(private apiService: ApiService, private fb: FormBuilder) { }
 
@@ -29,7 +30,7 @@ export class InserimentoComponent implements OnInit {
       console.log('Res[0] eccetera: '+this.res[0]["Field"]);
       const group = this.fb.group({});
       this.res.forEach(obj => group.addControl(obj["Field"], this.fb.control({disabled: false, value: ''})));
-      // console.log(group.controls);
+      console.log(group.controls);
       for (const field in group.controls) {
         if (field.match('autore|titolo|data|collocazione|ISBN|pubblicazione')) {
           let control = group.get(field);
@@ -37,6 +38,7 @@ export class InserimentoComponent implements OnInit {
         }
       }
       this.inserimForm = group;
+      this.isFormReady = true;
     });
   }
   onsubmit(form: Object) {

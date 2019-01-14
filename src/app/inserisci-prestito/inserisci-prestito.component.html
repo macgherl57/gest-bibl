@@ -1,5 +1,9 @@
 <h3 class="mt-lg-3">Inserimento nuovo prestito</h3>
-<form class="form" #insprestForm="ngForm">
+<div class="alert alert-warning" role="alert" *ngIf="displayMsg">
+  <strong>Attenzione! Prestito già inserito.</strong><a routerLink="/modprestito/{{prestito_id}}/{{index}}" class="alert-link"> Vai a {{libro.collocazione}}</a>
+</div>
+<div *ngIf="!displayMsg">
+<form class="form" #insprestForm="ngForm" (ngSubmit)="onsubmit(insprestForm.value)">
   <div class="form-group">
     <label for="classe">Classe</label>
     <select [(ngModel)]="classe" (change)="getPersone()" class="form-control" name="classe" id="classe" #req="ngModel" required>
@@ -39,3 +43,4 @@
       <button type="submit" class="btn btn-lg btn-dark">Inserisci</button>
     </ng-template>
 </form>
+</div>

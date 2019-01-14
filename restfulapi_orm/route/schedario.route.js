@@ -11,4 +11,5 @@ module.exports = function(app) {
     app.put('/biblioteca/prestito/:id', schedario.modprestito);
     app.get('/biblioteca/classi', schedario.classi);
     app.get('/biblioteca/cognomenome/:cl', schedario.cognomenome);
+    app.post('/biblioteca/insprest', schedario.insprest);
 }
