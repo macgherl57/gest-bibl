@@ -11,9 +11,11 @@ export class CanActivateGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      if (!this.lC.isSignedIn()) {
+      if (this.lC.isSignedIn() && window.localStorage.getItem('token')) {
+        return true;
+      } else {
         this._router.navigate(['login']);
+        return false;
       }
-    return true;
-  }
+    }
 }

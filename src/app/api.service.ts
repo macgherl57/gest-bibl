@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { AuthsessService } from './authsess.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Libro, Prestito, PrestitoRow, RetrievedRow } from './libro';
@@ -24,6 +24,7 @@ export class ApiService {
     return !!this.sessionService.studente_id;
   }
   public doSignOut() {
+    window.localStorage.removeItem('token');
     this.sessionService.destroy();
   }
   public getLibri(ricerca: string): Observable<Libro[]> {
@@ -34,16 +35,22 @@ export class ApiService {
     return this.httpClient.get<Object[]>(`${this.API_URL}/showcolumns`);
   }
   public insertBook(inserimForm: Object) {
-    return this.httpClient.post(`${this.API_URL}/insert`, inserimForm);
+    let token = localStorage.getItem('token') ? localStorage.getItem('token') : "abcd";
+    let httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': token }) };
+    return this.httpClient.post(`${this.API_URL}/insert`, inserimForm, httpOptions);
   }
   public getLibroDetail(n: number)  {
     return this.httpClient.get<Libro>(`${this.API_URL}/libro/` + n);
   }
   public editLibro(n: number, editForm: Libro) {
-    return this.httpClient.put(`${this.API_URL}/edit/` + n, editForm);
+    let token = localStorage.getItem('token') ? localStorage.getItem('token') : "abcd";
+    let httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': token }) };
+    return this.httpClient.put(`${this.API_URL}/edit/` + n, editForm, httpOptions);
   }
   public deleteLibro(n: number) {
-    return this.httpClient.delete(`${this.API_URL}/libro/` + n);
+    let token = localStorage.getItem('token') ? localStorage.getItem('token') : "abcd";
+    let httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': token }) };
+    return this.httpClient.delete(`${this.API_URL}/edit/` + n, httpOptions);
   }
   public getUnretLoans() {
     return this.httpClient.get<Prestito[]>(`${this.API_URL}/prestiti`);

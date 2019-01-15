@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
         this.sessionService.studente_id = this.studente_id;
         this.sessionService.username = loginForm.username;
         this.apiService.isUserLoggedIn.next(true);
-        this.apiService.libriSearch.next([]);
-        this.apiService.schedarioSave.next([]);
+        // console.log('Token is: ' + res['token']);
+        window.localStorage.setItem('token', res['token']);
         this.router.navigate(['cerca']);
       } else {
         this.error = true;
