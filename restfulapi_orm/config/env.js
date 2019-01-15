@@ -6,7 +6,7 @@ const env = {
     database1: 'biblioteca',
     database2: 'secrets',
     username: 'root',
-    password: 'Hbn678%&00^',
+    password: '',
     logging: false,
     dialect: 'mysql',
     pool: {
