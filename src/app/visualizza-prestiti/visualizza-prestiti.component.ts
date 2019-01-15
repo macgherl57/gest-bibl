@@ -12,7 +12,7 @@ export class VisualizzaPrestitiComponent implements OnInit {
   public data: Array<Prestito>;
 
   constructor(private apiService: ApiService) { }
-  /*
+  
   ngOnInit() {
     this.apiService.schedarioSave.subscribe(w => {
       if (w.length > 0) {
@@ -22,12 +22,8 @@ export class VisualizzaPrestitiComponent implements OnInit {
       }
     })
   }
-  */
-  ngOnInit() {
-    this.getPrestiti();
-  }
-
-  public getPrestiti() {
+  
+    public getPrestiti() {
       this.apiService.getUnretLoans().subscribe((res: Prestito[]) => {
         this.data = res;
         this.apiService.schedarioSave.next(res);

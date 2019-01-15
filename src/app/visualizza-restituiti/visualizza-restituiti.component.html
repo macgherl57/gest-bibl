@@ -1,0 +1,28 @@
+<h3 class="mt-lg-5">
+  Storico prestiti restituiti (a.s. 2018-2019)
+</h3>
+<hr>
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Tipologia</th>
+            <th scope="col">Cognome Nome</th>
+            <th scope="col">Autore</th>
+            <th scope="col">Titolo</th>
+            <th scope="col">Collocazione</th>
+            <th scope="col">Data Prelievo</th>
+            <th scope="col">Data Restituzione</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of data; let i = index">
+            <th scope="row">{{ row.Student != null ? row.Student.cl : row.Prof.id > 30000 ? 'Ata' : 'Docente' }}</th>
+            <td>{{ row.Prof == null ? row.Student.cogn_nome : row.Prof.cogn + ' ' + row.Prof.nome }}</td>
+            <td>{{ row.Schedario.autore }}</td>
+            <td>{{ row.Schedario.titolo }}</td>
+            <td>{{ row.Schedario.collocazione }}</td>
+            <td>{{ row.prelevato | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ row.restituito | date: 'dd/MM/yyyy'}}</td>
+          </tr>
+        </tbody>
+</table>

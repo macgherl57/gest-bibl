@@ -86,7 +86,7 @@ export class InserisciPrestitoComponent implements OnInit {
       data_restituzione: null,
       data_1_soll: null,
       data_2_soll: null,
-      note: null
+      note: insprestForm['note']
     }
     this.apiservice.insPrest(newPrestitoRow).subscribe(res => {
       if (!res['error']) {

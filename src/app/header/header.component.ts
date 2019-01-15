@@ -27,4 +27,8 @@ export class HeaderComponent implements OnInit {
   public openPage() {
     this._route.navigate(['prestiti']);
   }
+
+  public openRest() {
+    this._route.navigate(['prestitirest']);
+  }
 }

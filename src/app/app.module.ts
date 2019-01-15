@@ -16,6 +16,7 @@ import { ConfirmationDialogService } from './confirmation-dialog/confirmation-di
 import { VisualizzaPrestitiComponent } from './visualizza-prestiti/visualizza-prestiti.component';
 import { ModificaPrestitoComponent } from './modifica-prestito/modifica-prestito.component';
 import { InserisciPrestitoComponent } from './inserisci-prestito/inserisci-prestito.component';
+import { VisualizzaRestituitiComponent } from './visualizza-restituiti/visualizza-restituiti.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { InserisciPrestitoComponent } from './inserisci-prestito/inserisci-prest
     ConfirmationDialogComponent,
     VisualizzaPrestitiComponent,
     ModificaPrestitoComponent,
-    InserisciPrestitoComponent
+    InserisciPrestitoComponent,
+    VisualizzaRestituitiComponent
   ],
   imports: [
     BrowserModule,

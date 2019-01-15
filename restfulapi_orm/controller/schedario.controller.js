@@ -58,6 +58,12 @@ exports.cancella = (req, res) => {
     })
 };
 exports.prestiti = (req, res) => {
+    let where = {};
+    if (req.query.rest == null) {
+        where = { data_restituzione: null}
+    } else {
+        where = { data_restituzione: { [op.not]: null } }
+    }
     Prestito.findAll({
         include: [{
             model: AllAna, as: 'Student',
@@ -71,10 +77,8 @@ exports.prestiti = (req, res) => {
             model: Schedario, as: 'Schedario',
             attributes: ['N', 'autore', 'titolo', 'collocazione'],
         }],
-        attributes: ['id', ['data_prelievo','prelevato']],
-        where: {
-            data_restituzione: null,
-        },
+        attributes: ['id', ['data_prelievo','prelevato'], ['data_restituzione','restituito']],
+        where: where,
     }).then(prestiti => {
         res.send(prestiti);
     })

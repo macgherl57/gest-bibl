@@ -8,6 +8,7 @@ import { LibroeditComponent } from './libroedit/libroedit.component';
 import { VisualizzaPrestitiComponent } from './visualizza-prestiti/visualizza-prestiti.component';
 import { ModificaPrestitoComponent } from './modifica-prestito/modifica-prestito.component';
 import { InserisciPrestitoComponent } from './inserisci-prestito/inserisci-prestito.component';
+import { VisualizzaRestituitiComponent } from './visualizza-restituiti/visualizza-restituiti.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'modprestito/:id/:i', component: ModificaPrestitoComponent, canActivate: [CanActivateGuard]},
   { path: 'prestiti', component: VisualizzaPrestitiComponent, canActivate: [CanActivateGuard]},
   { path: 'insprestito/:n', component: InserisciPrestitoComponent, canActivate: [CanActivateGuard]},
+  { path: 'prestitirest', component: VisualizzaRestituitiComponent, canActivate: [CanActivateGuard]},
   { path: '', redirectTo: 'cerca', pathMatch: 'full'},
 ];
 

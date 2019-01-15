@@ -3,31 +3,61 @@
   <strong>Prestito modificato con Successo!</strong>
 </div>
 <div *ngIf="isFormReady">
-<form #modPrestForm="ngForm" class="form" (ngSubmit)="onsubmit(modPrestForm.value)">
-  <div class="form-group">
-    <small id="helpId" class="text-muted">Tipologia</small>
-    <input type="text" [(ngModel)]="tipologia" name="tipologia" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">Cognome e Nome</small>
-    <input type="text" [(ngModel)]="cognome_e_nome" class="form-control form-control-sm" name="student_id" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">Autore</small>
-    <input type="text" [(ngModel)]="Schedario['autore']" name="autore" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">Titolo</small>
-    <input type="text" [(ngModel)]="Schedario['titolo']" name= "titolo" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">Prelevato</small>
-    <input type="text" [(ngModel)]="row.prestito.data_prelievo" name="data_prelievo" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">Data 1° rinn.</small>
-    <input type="text" [(ngModel)]="row.prestito.data_1_rinnovo" name="data_1_rinnovo" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">Data 2° rinn.</small>
-    <input type="text" [(ngModel)]="row.prestito.data_2_prelievo" name="data_2_rinnovo" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">Restituito</small>
-    <input type="text" [(ngModel)]="row.prestito.data_restituzione" name="data_restituzione" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">1° sollecito</small>
-    <input type="text" [(ngModel)]="row.prestito.data_1_soll" name="data_1_soll" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">2° sollecito</small>
-    <input type="text" [(ngModel)]="row.prestito.data_2_soll" name="data_2_soll" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">Note</small>
-    <input type="text" [(ngModel)]="row.prestito.note" name="note" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
-  </div>
-  <button type="submit" role="button" class="bnt btn-dark" >Salva</button>
-</form>
+  <form #modPrestForm="ngForm" class="form" (ngSubmit)="onsubmit(modPrestForm.value)">
+    <div class="form-group">
+      <small id="helpId" class="text-muted">Tipologia</small>
+      <input type="text" [(ngModel)]="tipologia" name="tipologia" class="form-control form-control-sm" readonly aria-describedby="helpId">
+      <small id="helpId" class="text-muted">Cognome e Nome</small>
+      <input type="text" [(ngModel)]="cognome_e_nome" class="form-control form-control-sm" name="student_id" readonly aria-describedby="helpId">
+      <small id="helpId" class="text-muted">Autore</small>
+      <input type="text" [(ngModel)]="Schedario['autore']" name="autore" class="form-control form-control-sm" readonly aria-describedby="helpId">
+      <small id="helpId" class="text-muted">Titolo</small>
+      <input type="text" [(ngModel)]="Schedario['titolo']" name= "titolo" class="form-control form-control-sm" readonly aria-describedby="helpId">
+      <small id="helpId" class="text-muted">Prelevato</small>
+      <input type="text" [(ngModel)]="row.prestito.data_prelievo" name="data_prelievo" 
+      #dataprel="ngModel" class="form-control form-control-sm" aria-describedby="helpId" pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$" required>
+      <div *ngIf="dataprel.invalid && (dataprel.dirty || dataprel.touched)" class="alert alert-danger">
+        <div *ngIf="dataprel.errors.pattern">Formato data: GG/MM/AAAA</div>
+        <div *ngIf="dataprel.errors.required">Campo obbligatorio</div>
+      </div>
+      <small id="helpId" class="text-muted">Data 1° rinn.</small>
+      <input type="text" [(ngModel)]="row.prestito.data_1_rinnovo" name="data_1_rinnovo" 
+      #data1rinn="ngModel" class="form-control form-control-sm" aria-describedby="helpId" pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+      <div *ngIf="data1rinn.invalid && (data1rinn.dirty || data1rinn.touched)" class="alert alert-danger">
+        <div *ngIf="data1rinn.errors.pattern">Formato data: GG/MM/AAAA</div>
+      </div>
+      <small id="helpId" class="text-muted">Data 2° rinn.</small>
+      <input type="text" [(ngModel)]="row.prestito.data_2_prelievo" name="data_2_rinnovo" 
+      #data2prel="ngModel" class="form-control form-control-sm" aria-describedby="helpId" pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+      <div *ngIf="data2prel.invalid && (data2prel.dirty || data2prel.touched)" class="alert alert-danger">
+        <div *ngIf="data2prel.errors.pattern">Formato data: GG/MM/AAAA</div>
+      </div>
+      <small id="helpId" class="text-muted">Restituito</small>
+      <input type="text" [(ngModel)]="row.prestito.data_restituzione" name="data_restituzione" 
+      #datarest="ngModel" class="form-control form-control-sm" aria-describedby="helpId" pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+      <div *ngIf="datarest.invalid && (datarest.dirty || datarest.touched)" class="alert alert-danger">
+        <div *ngIf="datarest.errors.pattern">Formato data: GG/MM/AAAA</div>
+      </div>
+      <small id="helpId" class="text-muted">1° sollecito</small>
+      <input type="text" [(ngModel)]="row.prestito.data_1_soll" name="data_1_soll" 
+      #data1soll="ngModel" class="form-control form-control-sm" aria-describedby="helpId" pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+      <div *ngIf="data1soll.invalid && (data1soll.dirty || data1soll.touched)" class="alert alert-danger">
+        <div *ngIf="data1soll.errors.pattern">Formato data: GG/MM/AAAA</div>
+      </div>
+      <small id="helpId" class="text-muted">2° sollecito</small>
+      <input type="text" [(ngModel)]="row.prestito.data_2_soll" name="data_2_soll" 
+      #data2soll="ngModel" class="form-control form-control-sm" aria-describedby="helpId" pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+      <div *ngIf="data2soll.invalid && (data2soll.dirty || data2soll.touched)" class="alert alert-danger">
+        <div *ngIf="data2soll.errors.pattern">Formato data: GG/MM/AAAA</div>
+      </div>
+      <small id="helpId" class="text-muted">Note</small>
+      <input type="text" [(ngModel)]="row.prestito.note" name="note" class="form-control form-control-sm" aria-describedby="helpId" maxlength="25" #note="ngModel">
+    </div>
+    <div *ngIf="!modPrestForm.valid else showSubmitButton">
+      <button type="submit" class="btn btn-lg btn-dark" disabled>Salva</button>
+    </div>
+    <ng-template #showSubmitButton>
+      <button type="submit" class="btn btn-lg btn-dark">Salva</button>
+    </ng-template>
+  </form>
 </div>

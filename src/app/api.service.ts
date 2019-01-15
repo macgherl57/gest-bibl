@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthsessService } from './authsess.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Libro, Prestito, PrestitoRow, RetrievedRow } from './libro';
@@ -47,6 +47,10 @@ export class ApiService {
   }
   public getUnretLoans() {
     return this.httpClient.get<Prestito[]>(`${this.API_URL}/prestiti`);
+  }
+  public getRetLoans() {
+    let options =  new HttpParams().set('rest','y'); 
+    return this.httpClient.get<Prestito[]>(`${this.API_URL}/prestiti`, {params: options});
   }
   public getPrestito(id: number) {
     return this.httpClient.get<RetrievedRow>(`${this.API_URL}/prestito/` + id);
