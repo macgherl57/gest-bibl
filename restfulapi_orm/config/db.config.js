@@ -5,6 +5,7 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize(env.database, env.username, env.password, {
   //host: env.host,
   //port: env.port,
+  logging: env.logging,
   socketPath: env.socketPath,
   dialect: env.dialect,
   dialectOptions: env.dialectOptions,
@@ -39,7 +40,7 @@ const sequelize2 = new Sequelize(env.database2, env.username, env.password, {
   dialect: env.dialect,
   dialectOptions: env.dialectOptions,
   operatorsAliases: false,
-  //logging: env.logging,
+  logging: env.logging,
  
   pool: {
     max: env.max,
