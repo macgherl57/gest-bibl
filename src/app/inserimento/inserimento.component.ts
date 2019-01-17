@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthsessService } from '../authsess.service';
+import { Libro } from '../libro';
 
 
 @Component({
@@ -16,6 +17,8 @@ export class InserimentoComponent implements OnInit {
   public errorMsg: boolean = false;
   public successAlert: boolean = false;
   public isFormReady: boolean = false;
+  public libri: Libro[];
+  public N: number;
 
   constructor(private apiService: ApiService, private fb: FormBuilder) { }
 
@@ -41,14 +44,19 @@ export class InserimentoComponent implements OnInit {
       this.isFormReady = true;
     });
   }
-  onsubmit(form: Object) {
-    console.log(form);
+  onsubmit(form: Libro) {
+    // console.log(form);
     this.apiService.insertBook(form).subscribe(data => {
       if (!data["error"]) {
         this.successAlert = true;
+        this.N = data['data']['N'];
+        form.N = this.N;
       } else {
         this.errorMsg = true;
       }
     });
+    this.apiService.libriSearch.subscribe(libri => { this.libri = libri });
+    this.libri.push(form);
+    this.apiService.libriSearch.next(this.libri);
   }
 }

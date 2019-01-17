@@ -1,17 +1,14 @@
 const env = require('./env.js');
- 
 const Sequelize = require('sequelize');
+
 // DB = 2018_2019
 const sequelize = new Sequelize(env.database, env.username, env.password, {
-  //host: env.host,
-  //port: env.port,
   logging: env.logging,
-  socketPath: env.socketPath,
   dialect: env.dialect,
   dialectOptions: env.dialectOptions,
   operatorsAliases: false,
   pool: {
-    max: env.max,
+    max: env.pool.max,
     min: env.pool.min,
     acquire: env.pool.acquire,
     idle: env.pool.idle
@@ -19,14 +16,11 @@ const sequelize = new Sequelize(env.database, env.username, env.password, {
 });
 // DB = biblioteca
 const sequelize1 = new Sequelize(env.database1, env.username, env.password, {
-  //host: env.host,
-  //port: env.port,
-  socketPath: env.socketPath,
   dialect: env.dialect,
   dialectOptions: env.dialectOptions,
   operatorsAliases: false,
   pool: {
-    max: env.max,
+    max: env.pool.max,
     min: env.pool.min,
     acquire: env.pool.acquire,
     idle: env.pool.idle
@@ -34,23 +28,20 @@ const sequelize1 = new Sequelize(env.database1, env.username, env.password, {
 }); 
 // DB = secrets
 const sequelize2 = new Sequelize(env.database2, env.username, env.password, {
-  //host: env.host,
-  //port: env.port,
-  socketPath: env.socketPath,
   dialect: env.dialect,
   dialectOptions: env.dialectOptions,
   operatorsAliases: false,
   logging: env.logging,
  
   pool: {
-    max: env.max,
+    max: env.pool.max,
     min: env.pool.min,
     acquire: env.pool.acquire,
     idle: env.pool.idle
   }
 }); 
 
- const db = {};
+const db = {};
  
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -67,5 +58,7 @@ db.classi = require('../models/classi.js')(sequelize, Sequelize);
 db.prestito.belongsTo(db.all_ana_studs, { as: 'Student', foreignKey: 'student_id' });
 db.prestito.belongsTo(db.ana_profs, { as: 'Prof', foreignKey: 'student_id' });
 db.prestito.belongsTo(db.schedario, { as: 'Schedario', foreignKey: 'book_id' });
+db.schedario.hasOne(db.prestito, { as: 'Prestito', foreignKey: 'book_id' });
 db.classi.hasMany(db.all_ana_studs, { as: 'Students', foreignKey: 'cl' });
+
 module.exports = db;

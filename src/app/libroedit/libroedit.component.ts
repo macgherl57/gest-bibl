@@ -33,7 +33,7 @@ export class LibroeditComponent implements OnInit {
   onsubmit(editForm: Libro, n: number) {
     // console.log(editForm);
     this.apiService.editLibro(n, editForm).subscribe(res => {
-      console.log(res['data']);
+      // console.log(res['data']);
       if (res['data'] == 1) {
         this.is_success = true;
       }
@@ -48,7 +48,7 @@ export class LibroeditComponent implements OnInit {
         newSearch.push(libro)
       }
     });
-    console.log(newSearch);
+    // console.log(newSearch);
     this.apiService.libriSearch.next(newSearch);
   }
 }
