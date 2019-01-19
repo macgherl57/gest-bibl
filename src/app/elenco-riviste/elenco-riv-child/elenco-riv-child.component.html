@@ -1,0 +1,16 @@
+<form class="form-inline" #modrivForm="ngForm" (ngSubmit)="onsubmit(modrivForm.value)">
+  <div class="form-row">
+    <div class="col">
+      <input [(ngModel)]="id" type="text" name="id" id="id" class="form-control" placeholder="id" [readonly]="true">
+    </div>
+    <div class="col">
+      <input [(ngModel)]="titolo" type="text" name="titolo" id="titolo" class="form-control" placeholder="titolo" required>
+    </div>
+    <div class="col">
+      <input [(ngModel)]="anno" type="text" name="anno" id="anno" class="form-control" placeholder="anno" required>
+    </div>
+    <div class="col">
+        <button type="submit" class="btn btn-dark" [disabled]="!modrivForm.valid">Salva</button>
+    </div>
+  </div>
+</form>

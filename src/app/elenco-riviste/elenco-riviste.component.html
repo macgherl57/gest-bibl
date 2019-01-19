@@ -1,0 +1,21 @@
+<h3 class="mt-4">Visualizza/Aggiungi/Modifica Riviste</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">titolo</th>
+        <th scope="col">anno</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="3"><app-elenco-riv-child [id]="newN"></app-elenco-riv-child></td>
+      </tr>
+      <tr *ngFor="let riv of rivArr">
+        <td scope="row">{{riv.id}}</td>
+        <td>{{riv.titolo}}</td>
+        <td>{{riv.anno}}</td>
+      </tr>
+    </tbody>
+  </table>

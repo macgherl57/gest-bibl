@@ -54,11 +54,13 @@ db.all_ana_studs = require('../models/all_ana_studs.js')(sequelize, Sequelize);
 db.ana_profs = require('../models/ana_profs.js')(sequelize, Sequelize);
 db.profs_access = require('../models/profs_access.js')(sequelize2, Sequelize);
 db.classi = require('../models/classi.js')(sequelize, Sequelize);
+db.elencoriviste = require('../models/elencoriviste.js')(sequelize1, Sequelize);
+db.riviste = require('../models/riviste.js')(sequelize1, Sequelize);
 // Relationships
 db.prestito.belongsTo(db.all_ana_studs, { as: 'Student', foreignKey: 'student_id' });
 db.prestito.belongsTo(db.ana_profs, { as: 'Prof', foreignKey: 'student_id' });
 db.prestito.belongsTo(db.schedario, { as: 'Schedario', foreignKey: 'book_id' });
 db.schedario.hasOne(db.prestito, { as: 'Prestito', foreignKey: 'book_id' });
 db.classi.hasMany(db.all_ana_studs, { as: 'Students', foreignKey: 'cl' });
-
+db.elencoriviste.hasMany(db.riviste, { as: 'Riviste', foreignKey: 'rivista_id'});
 module.exports = db;

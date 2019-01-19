@@ -30,7 +30,7 @@ export class InserisciPrestitoComponent implements OnInit {
 
   ngOnInit() {
     this.n = +this.router.snapshot.paramMap.get('n');
-    console.log('inside ngOninit(): n = :'+this.n);
+    //console.log('inside ngOninit(): n = :'+this.n);
     this.checkIfPrestito();
     this.populateSelect();
     this.getLibroData();
@@ -39,7 +39,7 @@ export class InserisciPrestitoComponent implements OnInit {
   public checkIfPrestito() {
     this.apiservice.getUnretLoans().subscribe(res => { 
       this.allPrest = res;
-      console.log('Inside checkIfPrestito: ' + this.allPrest.length + ' n= ' + this.n);
+      //console.log('Inside checkIfPrestito: ' + this.allPrest.length + ' n= ' + this.n);
       this.allPrest.forEach((obj, i) => {
         if (obj.Schedario['N'] === this.n) {
           this.index = i;
@@ -47,7 +47,7 @@ export class InserisciPrestitoComponent implements OnInit {
           this.displayMsg = true;
         }
       });
-      console.log('Length inside checkIf...: ' + this.allPrest.length);
+      //console.log('Length inside checkIf...: ' + this.allPrest.length);
       this.apiservice.schedarioSave.next(this.allPrest);
     });
   }
@@ -70,7 +70,7 @@ export class InserisciPrestitoComponent implements OnInit {
     this.libri.forEach(l => {
       if (l.N === this.n ) {
         this.libro = l;
-        console.log('Questo libro: ', this.libro);
+        //console.log('Questo libro: ', this.libro);
       }
     });
   }

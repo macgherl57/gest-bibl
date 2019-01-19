@@ -9,6 +9,8 @@ import { VisualizzaPrestitiComponent } from './visualizza-prestiti/visualizza-pr
 import { ModificaPrestitoComponent } from './modifica-prestito/modifica-prestito.component';
 import { InserisciPrestitoComponent } from './inserisci-prestito/inserisci-prestito.component';
 import { VisualizzaRestituitiComponent } from './visualizza-restituiti/visualizza-restituiti.component';
+import { ElencoRivisteComponent } from './elenco-riviste/elenco-riviste.component';
+import { GestisciRivistaComponent } from './gestisci-rivista/gestisci-rivista.component';
 
 
 const routes: Routes = [
@@ -20,6 +22,8 @@ const routes: Routes = [
   { path: 'prestiti', component: VisualizzaPrestitiComponent, canActivate: [CanActivateGuard]},
   { path: 'insprestito/:n', component: InserisciPrestitoComponent, canActivate: [CanActivateGuard]},
   { path: 'prestitirest', component: VisualizzaRestituitiComponent, canActivate: [CanActivateGuard]},
+  { path: 'elencoriviste', component: ElencoRivisteComponent, canActivate: [CanActivateGuard]},
+  { path: 'gestiscirivista', component: GestisciRivistaComponent, canActivate: [CanActivateGuard]},
   { path: '', redirectTo: 'cerca', pathMatch: 'full'},
 ];
 

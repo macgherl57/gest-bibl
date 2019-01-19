@@ -6,6 +6,30 @@ const Prestito = db.prestito;
 const AllAna = db.all_ana_studs;
 const AnaProf = db.ana_profs;
 const Classi = db.classi;
+const Riviste = db.elencoriviste;
+
+exports.getsameriv = (req, res) => {
+    let id = req.params.id;
+    Riviste.findByPk(id).then(rivista => {
+        rivista.getRiviste({ order: [['data_di_arrivo','DESC']] }).then(allriv => {
+            res.send(allriv)
+        });
+    })
+};
+exports.insertriv = (req, res) => {
+    let body = req.body;
+    Riviste.create(body).then(result => {
+        res.send({error: false, data: result, message: "Periodic saved OK!"});
+    })
+};
+exports.allriviste = (req, res) => {
+    Riviste.findAll({
+        attributes: ['id','titolo','anno'],
+        order: [ ['titolo', 'ASC'] ],
+    }).then(riviste => {
+        res.send(riviste);
+    })
+};
 exports.findByN = (req, res) => {
     Schedario.findByPk(req.params.n).then(libro => {
         res.send(libro);
@@ -32,7 +56,7 @@ exports.colonne = (req, res) => {
 };
 exports.inserisci = (req, res) => {
     let body = req.body;
-    Schedario.create(body) .then(result => {
+    Schedario.create(body).then(result => {
         res.send({ error: false, data: result, message: 'Everything OK' });
     })
 };

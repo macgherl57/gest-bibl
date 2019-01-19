@@ -17,6 +17,9 @@ import { VisualizzaPrestitiComponent } from './visualizza-prestiti/visualizza-pr
 import { ModificaPrestitoComponent } from './modifica-prestito/modifica-prestito.component';
 import { InserisciPrestitoComponent } from './inserisci-prestito/inserisci-prestito.component';
 import { VisualizzaRestituitiComponent } from './visualizza-restituiti/visualizza-restituiti.component';
+import { ElencoRivisteComponent } from './elenco-riviste/elenco-riviste.component';
+import { GestisciRivistaComponent } from './gestisci-rivista/gestisci-rivista.component';
+import { ElencoRivChildComponent } from './elenco-riviste/elenco-riv-child/elenco-riv-child.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { VisualizzaRestituitiComponent } from './visualizza-restituiti/visualizz
     VisualizzaPrestitiComponent,
     ModificaPrestitoComponent,
     InserisciPrestitoComponent,
-    VisualizzaRestituitiComponent
+    VisualizzaRestituitiComponent,
+    ElencoRivisteComponent,
+    GestisciRivistaComponent,
+    ElencoRivChildComponent
   ],
   imports: [
     BrowserModule,

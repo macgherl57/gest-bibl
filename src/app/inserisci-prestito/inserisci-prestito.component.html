@@ -3,49 +3,49 @@
   <strong>Attenzione! Prestito già inserito.</strong><a routerLink="/modprestito/{{prestito_id}}/{{index}}" class="alert-link"> Vai a {{libro.collocazione}}</a>
 </div>
 <div *ngIf="!displayMsg">
-<form class="form" #insprestForm="ngForm" (ngSubmit)="onsubmit(insprestForm.value)">
-  <div class="form-group">
-    <label for="classe">Classe</label>
-    <select [(ngModel)]="classe" (change)="getPersone()" class="form-control" name="classe" id="classe" #req="ngModel" required>
-      <option *ngFor="let cl of arr" [value]="cl">{{cl}}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="cognome_nome">Cognome e Nome</label>
-    <select [(ngModel)]="persona" class="form-control" name="cognome_nome" id="cognome_nome" #cogn_nome="ngModel" required>
-      <option *ngFor="let pers of personae" [value]="pers['id']">{{ pers['cogn'] ? pers['cogn'] + ' ' + pers['nome'] : pers['cogn_nome']}}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="autore">Autore</label>
-    <input [ngModel]="libro.autore" [disabled]="libro.autore" type="text" name="autore" id="autore" class="form-control" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">autore</small>
-  </div>
-  <div class="form-group">
-    <label for="titolo">Titolo</label>
-    <input [ngModel]="libro.titolo" [disabled]="libro.titolo" type="text" name="titolo" id="titolo" class="form-control" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">titolo</small>
-  </div>
-  <div class="form-group">
-    <label for="collocazione">Collocazione</label>
-    <input [ngModel]="libro.collocazione" [disabled]="libro.collocazione" type="text" name="collocazione" id="collocazione" class="form-control" placeholder="" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">collocazione</small>
-  </div>
-  <div class="form-group">
-    <label for="data_prelievo">Data Prelievo</label>
-    <input [(ngModel)]="libro.data_prelievo" type="text" name="data_prelievo" id="data_prelievo" 
-        class="form-control" placeholder="" aria-describedby="helpId" #data="ngModel" required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
-    <div *ngIf="data.invalid && (data.dirty || data.touched)" class="alert alert-danger">
-      <div *ngIf="data.errors.pattern">Data in formato sbagliato.</div>
-      <div *ngIf="data.errors.required">Data obbligatoria</div>
+  <form class="form" #insprestForm="ngForm" (ngSubmit)="onsubmit(insprestForm.value)">
+    <div class="form-group">
+      <label for="classe">Classe</label>
+      <select [(ngModel)]="classe" (change)="getPersone()" class="form-control" name="classe" id="classe" #req="ngModel" required>
+        <option *ngFor="let cl of arr" [value]="cl">{{cl}}</option>
+      </select>
     </div>
-    <small id="helpId" class="text-muted">formato: GG/MM/AAAA</small>
-  </div>
-  <div *ngIf="!insprestForm.valid else showSubmitButton">
+    <div class="form-group">
+      <label for="cognome_nome">Cognome e Nome</label>
+      <select [(ngModel)]="persona" class="form-control" name="cognome_nome" id="cognome_nome" #cogn_nome="ngModel" required>
+        <option *ngFor="let pers of personae" [value]="pers['id']">{{ pers['cogn'] ? pers['cogn'] + ' ' + pers['nome'] : pers['cogn_nome']}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="autore">Autore</label>
+      <input [ngModel]="libro.autore" [disabled]="libro.autore" type="text" name="autore" id="autore" class="form-control" placeholder="" aria-describedby="helpId">
+      <small id="helpId" class="text-muted">autore</small>
+    </div>
+    <div class="form-group">
+      <label for="titolo">Titolo</label>
+      <input [ngModel]="libro.titolo" [disabled]="libro.titolo" type="text" name="titolo" id="titolo" class="form-control" placeholder="" aria-describedby="helpId">
+      <small id="helpId" class="text-muted">titolo</small>
+    </div>
+    <div class="form-group">
+      <label for="collocazione">Collocazione</label>
+      <input [ngModel]="libro.collocazione" [disabled]="libro.collocazione" type="text" name="collocazione" id="collocazione" class="form-control" placeholder="" aria-describedby="helpId">
+      <small id="helpId" class="text-muted">collocazione</small>
+    </div>
+    <div class="form-group">
+      <label for="data_prelievo">Data Prelievo</label>
+      <input [(ngModel)]="libro.data_prelievo" type="text" name="data_prelievo" id="data_prelievo" 
+      class="form-control" placeholder="" aria-describedby="helpId" #data="ngModel" required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+      <div *ngIf="data.invalid && (data.dirty || data.touched)" class="alert alert-danger">
+        <div *ngIf="data.errors.pattern">Data in formato sbagliato.</div>
+        <div *ngIf="data.errors.required">Data obbligatoria</div>
+      </div>
+      <small id="helpId" class="text-muted">formato: GG/MM/AAAA</small>
+    </div>
+    <div *ngIf="!insprestForm.valid else showSubmitButton">
       <button type="submit" class="btn btn-lg btn-dark" disabled>Inserisci</button>
-  </div>
+    </div>
     <ng-template #showSubmitButton>
       <button type="submit" class="btn btn-lg btn-dark">Inserisci</button>
     </ng-template>
-</form>
+  </form>
 </div>

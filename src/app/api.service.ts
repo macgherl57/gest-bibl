@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { AuthsessService } from './authsess.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Libro, Prestito, PrestitoRow, RetrievedRow } from './libro';
+import { Riviste, Rivista } from './riviste';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class ApiService {
   public libriSearch = new BehaviorSubject<Libro[]>([]);
   public currentPage = new BehaviorSubject<number>(0);
   public schedarioSave = new BehaviorSubject<Prestito[]>([]);
+  public allRiv = new BehaviorSubject<Riviste[]>([]);
 
   public validate(loginForm: Object) {
     return this.httpClient.post(`${this.API_URL}/validate`, loginForm);
@@ -74,6 +76,15 @@ export class ApiService {
   }
   public insPrest(prestitoRow: PrestitoRow) {
     return this.httpClient.post(`${this.API_URL}/insprest`, prestitoRow, this.sendHeaders());
+  }
+  public allRiviste() {
+    return this.httpClient.get<Riviste[]>(`${this.API_URL}/allriviste`, this.sendHeaders());
+  }
+  public insertRiv(form: Riviste) {
+    return this.httpClient.post(`${this.API_URL}/insertriv`, form, this.sendHeaders());
+  }
+  public getSameriv(id: number) {
+    return this.httpClient.get<Rivista[]>(`${this.API_URL}/getsameriv/` + id, this.sendHeaders());
   }
   public sendHeaders() :object {
     let token = localStorage.getItem('token') ? localStorage.getItem('token') : "abcd";
