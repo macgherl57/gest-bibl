@@ -9,7 +9,9 @@
     <label for="stringa">Immetti la tua stringa di ricerca:</label>
     <input type="text"
       class="form-control" name="stringa" id="stringa" aria-describedby="helpId" placeholder="Testo della Ricerca" autofocus required ngModel>
-    <small id="helpId" class="form-text text-muted">Il testo può essere sia relativo a un autore sia a un titolo.</small>
+    <small id="helpId" class="form-text text-muted">Il testo può essere sia relativo a un autore sia a un titolo. Il testo può anche
+        corrispondere a una collocazione.
+    </small>
   </div>
   <div *ngIf="!ricercaForm.valid else showSubmitButton">
         <button type="submit" class="btn btn-lg btn-dark mr-2" disabled>Cerca</button>

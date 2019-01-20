@@ -6,7 +6,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LibrodetailComponent } from '../librodetail/librodetail.component';
 import { Router } from '@angular/router';
 import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
-import { LibroeditComponent } from '../libroedit/libroedit.component';
 
 @Component({
   selector: 'app-ricerca',

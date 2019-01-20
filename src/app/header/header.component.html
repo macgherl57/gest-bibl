@@ -1,8 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <img [src]="'assets/images/logorosso.png'" class="mr-2">
   <a class="navbar-brand" href="/">{{title}}</a>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active"><button class="btn btn-outline-light mr-2" [routerLink]="['/login']" routerLinkActive="router-link-active">Login</button></li>
+        <li *ngIf="!is_signedin" class="nav-item active"><button class="btn btn-outline-light mr-2" [routerLink]="['/login']" routerLinkActive="router-link-active">Login</button></li>
         <li class="nav-item active"><button class="btn btn-outline-light mr-2" [routerLink]="['/cerca']" routerLinkActive="router-link-active">Ricerca</button></li>
         <li *ngIf="is_signedin" class="nav-item active"><button class="btn btn-outline-light mr-2" [routerLink]="['/inserisci']" routerLinkActive="router-link-active">Inserisci</button></li>
         <li *ngIf="is_signedin" class="nav-item active"><button class="btn btn-outline-light mr-2" (click)="doLogout()">Esci</button></li>
@@ -21,6 +22,6 @@
           </div>
         </div>
       </ul>
-      <span class="navbar-text">Gest-Bibl - M. MacGherl@2019 Copyright All Right Reserved.</span>
+      <span class="navbar-text">Gestione Biblioteca v 1.0 - M. Gherlone@2019 All Rights Reserved.</span>
     </div>
 </nav>
