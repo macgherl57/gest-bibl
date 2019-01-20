@@ -20,6 +20,7 @@ import { VisualizzaRestituitiComponent } from './visualizza-restituiti/visualizz
 import { ElencoRivisteComponent } from './elenco-riviste/elenco-riviste.component';
 import { GestisciRivistaComponent } from './gestisci-rivista/gestisci-rivista.component';
 import { ElencoRivChildComponent } from './elenco-riviste/elenco-riv-child/elenco-riv-child.component';
+import { GestisciRivChildComponent } from './gestisci-rivista/gestisci-riv-child/gestisci-riv-child.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ElencoRivChildComponent } from './elenco-riviste/elenco-riv-child/elenc
     VisualizzaRestituitiComponent,
     ElencoRivisteComponent,
     GestisciRivistaComponent,
-    ElencoRivChildComponent
+    ElencoRivChildComponent,
+    GestisciRivChildComponent
   ],
   imports: [
     BrowserModule,

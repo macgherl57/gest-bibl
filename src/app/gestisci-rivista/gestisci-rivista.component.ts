@@ -35,4 +35,11 @@ export class GestisciRivistaComponent implements OnInit {
       })
     });
   }
+
+  testmethod(rivista_id: number) {
+   this.id = null;
+   this.onchange(rivista_id);
+   this.id = rivista_id;
+   //console.log('Did reset id!')
+  }
 }

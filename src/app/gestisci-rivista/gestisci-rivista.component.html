@@ -6,7 +6,8 @@
     </select>
   </div>
   <div *ngIf="id">
-    <table class="table">
+    <app-gestisci-riv-child [rivista_id]="id" [titolo]="titolo" (whatever)="testmethod($event)"></app-gestisci-riv-child>
+    <table class="table table-bordered table-dark">
       <thead>
         <tr>
           <th scope="col">titolo</th>
@@ -20,9 +21,6 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td colspan="3">ZERO FOR NOW</td>
-        </tr>
         <tr *ngFor="let r of rivista">
           <td scope="row">{{titolo}}</td>
           <td>{{r.anno}}</td>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Libro, PrestitoRow, Prestito } from '../libro';
 import { ActivatedRoute, Router} from '@angular/router';
+import  * as moment  from 'moment';
+
 
 @Component({
   selector: 'app-inserisci-prestito',
@@ -21,12 +23,13 @@ export class InserisciPrestitoComponent implements OnInit {
   index: number;
   prestito_id: number;
   allPrest: Array<Prestito> = [];
+  errDisplay: boolean = false;
 
   get personae(): Object[] {
     return this.persone;
   }
 
-  constructor(private apiservice: ApiService, private router: ActivatedRoute, private _router: Router) { }
+  constructor(private apiService: ApiService, private router: ActivatedRoute, private _router: Router) { }
 
   ngOnInit() {
     this.n = +this.router.snapshot.paramMap.get('n');
@@ -37,7 +40,7 @@ export class InserisciPrestitoComponent implements OnInit {
   }
   
   public checkIfPrestito() {
-    this.apiservice.getUnretLoans().subscribe(res => { 
+    this.apiService.getUnretLoans().subscribe(res => { 
       this.allPrest = res;
       //console.log('Inside checkIfPrestito: ' + this.allPrest.length + ' n= ' + this.n);
       this.allPrest.forEach((obj, i) => {
@@ -48,11 +51,11 @@ export class InserisciPrestitoComponent implements OnInit {
         }
       });
       //console.log('Length inside checkIf...: ' + this.allPrest.length);
-      this.apiservice.schedarioSave.next(this.allPrest);
+      this.apiService.schedarioSave.next(this.allPrest);
     });
   }
   public populateSelect() {
-    this.apiservice.getClassi().subscribe(res => {
+    this.apiService.getClassi().subscribe(res => {
       this.arr.push('Docente','Personale Ata');
       res.forEach(el => {
         this.arr.push(el);
@@ -60,13 +63,13 @@ export class InserisciPrestitoComponent implements OnInit {
     });
   }
   public getPersone() {
-    this.apiservice.getPersone(this.classe).subscribe(res => {
+    this.apiService.getPersone(this.classe).subscribe(res => {
       this.persone = res;
       });
   }
   public getLibroData() {
-    console.log('Inside get Libro: '+this.n);
-    this.apiservice.libriSearch.subscribe(res => { this.libri = res });
+    //console.log('Inside get Libro: '+this.n);
+    this.apiService.libriSearch.subscribe(res => { this.libri = res });
     this.libri.forEach(l => {
       if (l.N === this.n ) {
         this.libro = l;
@@ -75,12 +78,12 @@ export class InserisciPrestitoComponent implements OnInit {
     });
   }
   public onsubmit(insprestForm) {
-    console.log('Form object: ', insprestForm);
+    //console.log('Form object: ', insprestForm);
     let newPrestitoRow: PrestitoRow = {
       id: null,
       student_id: insprestForm['cognome_nome'],
       book_id: this.libro.N,
-      data_prelievo: insprestForm['data_prelievo'],
+      data_prelievo: moment(insprestForm['data_prelievo'], 'DD/MM/YYYY').toDate(),
       data_1_rinnovo: null,
       data_2_rinnovo: null,
       data_restituzione: null,
@@ -88,10 +91,14 @@ export class InserisciPrestitoComponent implements OnInit {
       data_2_soll: null,
       note: insprestForm['note']
     }
-    this.apiservice.insPrest(newPrestitoRow).subscribe(res => {
-      if (!res['error']) {
-        this._router.navigate(['prestiti']);
+    this.apiService.insPrest(newPrestitoRow).subscribe(res => {
+      if (res['error']) {
+        this.errDisplay = true;
       }
     });
+    this.apiService.getUnretLoans().subscribe(prestiti => {
+      this.apiService.schedarioSave.next(prestiti);
+    });
+    this._router.navigate(['prestiti']);
   }
 }

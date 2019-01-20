@@ -22,6 +22,8 @@ export class HeaderComponent implements OnInit {
   public doLogout() {
     this.apiService.doSignOut();
     this.apiService.isUserLoggedIn.next(false);
+    this.apiService.libriSearch.next([]);
+    this.apiService.schedarioSave.next([]);
     this._route.navigate(['login']);
   }
   public openPage() {

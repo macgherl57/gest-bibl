@@ -63,7 +63,7 @@
 <div class="row text-white bg-dark" *ngFor="let libro of pagedItems">
   <div class="col-md-2 text-dark bg-white">
       <a (click)="openModal(libro.N)" placement="top" ngbTooltip="dettagli libro"><img [src]="'assets/images/info-icon.png'" class="mr-2"></a>
-      <a (click)="openEdit(libro.N)"><img [src]="'assets/images/edit-icon.png'" placement="top" ngbTooltip="modifica libro" class="mr-2"></a>
+      <a *ngIf="is_signedin" (click)="openEdit(libro.N)"><img [src]="'assets/images/edit-icon.png'" placement="top" ngbTooltip="modifica libro" class="mr-2"></a>
       <a *ngIf="is_signedin" (click)="openConfirmationDialog(libro.N)"><img [src]="'assets/images/delete-icon.png'" ngbTooltip="elimina libro" class="mr-2"></a>
       <a *ngIf="is_signedin" routerLink="/insprestito/{{libro.N}}"><img [src]="'assets/images/lend-icon.png'" ngbTooltip="prestito libro" class="mr-2"></a>
   </div>

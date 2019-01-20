@@ -7,6 +7,7 @@ module.exports = function(app) {
     app.post('/biblioteca/insert', mw.verifyJWTToken_MW, schedario.inserisci);
     app.post('/biblioteca/insertriv', mw.verifyJWTToken_MW, schedario.insertriv);
     app.get('/biblioteca/getsameriv/:id', mw.verifyJWTToken_MW, schedario.getsameriv);
+    app.post('/biblioteca/addriv', mw.verifyJWTToken_MW, schedario.addriv);
     app.put('/biblioteca/edit/:n', mw.verifyJWTToken_MW, schedario.modifica);
     app.delete('/biblioteca/edit/:n', mw.verifyJWTToken_MW, schedario.cancella);
     app.get('/biblioteca/prestiti', mw.verifyJWTToken_MW, schedario.prestiti);

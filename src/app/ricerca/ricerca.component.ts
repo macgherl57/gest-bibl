@@ -83,10 +83,10 @@ export class RicercaComponent implements OnInit {
         this.deleteLibro(n);
       }
     })
-    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+    //.catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
   deleteLibro(n: number) {
-    console.log("user confirmed the delete action");
+    //console.log("user confirmed the delete action");
     this.apiService.deleteLibro(n).subscribe(res => {
       if (res['error']) {
         this.del_error = true;

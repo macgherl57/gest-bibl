@@ -86,6 +86,9 @@ export class ApiService {
   public getSameriv(id: number) {
     return this.httpClient.get<Rivista[]>(`${this.API_URL}/getsameriv/` + id, this.sendHeaders());
   }
+  public addRiv(form: Rivista) {
+    return this.httpClient.post(`${this.API_URL}/addriv`, form, this.sendHeaders());
+  }
   public sendHeaders() :object {
     let token = localStorage.getItem('token') ? localStorage.getItem('token') : "abcd";
     let httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': token }) };

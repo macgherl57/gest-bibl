@@ -7,10 +7,11 @@
       <input [(ngModel)]="titolo" type="text" name="titolo" id="titolo" class="form-control" placeholder="titolo" required>
     </div>
     <div class="col">
-      <input [(ngModel)]="anno" type="text" name="anno" id="anno" class="form-control" placeholder="anno" required>
+      <input [(ngModel)]="anno" type="text" name="anno" id="anno" class="form-control" placeholder="anno" required pattern="^[0-9]{4}$">
     </div>
     <div class="col">
         <button type="submit" class="btn btn-dark" [disabled]="!modrivForm.valid">Salva</button>
     </div>
+    <div *ngIf="displayMsg" class="alert alert-success" role="alert">Rivista aggiunta con successo!</div>
   </div>
 </form>

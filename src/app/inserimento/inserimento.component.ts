@@ -30,10 +30,10 @@ export class InserimentoComponent implements OnInit {
     this.apiService.getColumns().subscribe(data => {
       this.res = data;
       this.res.shift();
-      console.log('Res[0] eccetera: '+this.res[0]["Field"]);
+      //console.log('Res[0] eccetera: '+this.res[0]["Field"]);
       const group = this.fb.group({});
       this.res.forEach(obj => group.addControl(obj["Field"], this.fb.control({disabled: false, value: ''})));
-      console.log(group.controls);
+      //console.log(group.controls);
       for (const field in group.controls) {
         if (field.match('autore|titolo|data|collocazione|ISBN|pubblicazione')) {
           let control = group.get(field);

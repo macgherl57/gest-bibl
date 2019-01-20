@@ -7,7 +7,14 @@ const AllAna = db.all_ana_studs;
 const AnaProf = db.ana_profs;
 const Classi = db.classi;
 const Riviste = db.elencoriviste;
+const Rivista = db.riviste;
 
+exports.addriv = (req, res) => {
+    let body = req.body;
+    Rivista.create(body).then(result => {
+        res.send({error: false, data: result, message: "Rivista aggiunta OK"});
+    })
+};
 exports.getsameriv = (req, res) => {
     let id = req.params.id;
     Riviste.findByPk(id).then(rivista => {
@@ -103,6 +110,7 @@ exports.prestiti = (req, res) => {
         }],
         attributes: ['id', ['data_prelievo','prelevato'], ['data_restituzione','restituito']],
         where: where,
+        order: [[ 'data_prelievo', 'DESC' ]],
     }).then(prestiti => {
         res.send(prestiti);
     })
