@@ -10,6 +10,7 @@ import { Prestito } from '../libro';
 export class VisualizzaPrestitiComponent implements OnInit {
 
   public data: Array<Prestito>;
+  public is_signedin: boolean;
 
   constructor(private apiService: ApiService) { }
   
@@ -20,7 +21,7 @@ export class VisualizzaPrestitiComponent implements OnInit {
       } else {
         this.getPrestiti();
       }
-    })
+    });
   }
   
     public getPrestiti() {
