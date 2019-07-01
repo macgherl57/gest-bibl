@@ -6,6 +6,10 @@ const sc = require('../libs/auth');
 exports.validate = (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
+    if (!username.match(/preside|roncucci|gherlone|pirri|persich/i)) {
+        res.send({ error: true, data: {id: 0}, message: 'Authentication failure'});
+        return;
+    }
     Secrets.findOne({
         attributes: [ 'id', 'user_name' ],
         where: {
