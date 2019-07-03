@@ -6,7 +6,7 @@ const sequelize = new Sequelize(env.database, env.username, env.password, {
   logging: env.logging,
   dialect: env.dialect,
   dialectOptions: env.dialectOptions,
-  operatorsAliases: false,
+  //operatorsAliases: false,
   pool: {
     max: env.pool.max,
     min: env.pool.min,
@@ -18,7 +18,7 @@ const sequelize = new Sequelize(env.database, env.username, env.password, {
 const sequelize1 = new Sequelize(env.database1, env.username, env.password, {
   dialect: env.dialect,
   dialectOptions: env.dialectOptions,
-  operatorsAliases: false,
+  //operatorsAliases: false,
   pool: {
     max: env.pool.max,
     min: env.pool.min,
@@ -30,7 +30,7 @@ const sequelize1 = new Sequelize(env.database1, env.username, env.password, {
 const sequelize2 = new Sequelize(env.database2, env.username, env.password, {
   dialect: env.dialect,
   dialectOptions: env.dialectOptions,
-  operatorsAliases: false,
+  //operatorsAliases: false,
   logging: env.logging,
  
   pool: {
