@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { AuthsessService } from './authsess.service';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError} from 'rxjs/operators';
 import { Libro, Prestito, PrestitoRow, RetrievedRow } from './libro';
 import { Riviste, Rivista } from './riviste';
 
@@ -13,7 +12,7 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient, private sessionService: AuthsessService) { }
   
-  API_URL = 'http://localhost:3000/biblioteca';
+  API_URL = 'https://liceoberchet.edu.it:3306/biblioteca';
   public isUserLoggedIn = new BehaviorSubject<Boolean>(false);
   public libriSearch = new BehaviorSubject<Libro[]>([]);
   public currentPage = new BehaviorSubject<number>(0);
@@ -53,7 +52,7 @@ export class ApiService {
     return this.httpClient.delete(`${this.API_URL}/edit/` + n, this.sendHeaders());
   }
   public getUnretLoans() {
-    return this.httpClient.get<Prestito[]>(`${this.API_URL}/prestiti`, this.sendHeaders()).pipe(catchError(this.handleError));
+    return this.httpClient.get<Prestito[]>(`${this.API_URL}/prestiti`, this.sendHeaders()); //.pipe(catchError(this.handleError));
   }
   public getRetLoans() {
     let token = localStorage.getItem('token') ? localStorage.getItem('token') : "abcd";
@@ -95,6 +94,7 @@ export class ApiService {
     let httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'token': token }) };
     return httpOptions;
   }
+  /*
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -110,4 +110,5 @@ export class ApiService {
     return throwError(
       'Something bad happened; please try again later.');
   };
+  */
 }

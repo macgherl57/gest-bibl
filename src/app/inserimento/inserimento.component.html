@@ -15,6 +15,6 @@
     </div>
     <div role="alert" class="alert alert-danger" *ngIf="errorMsg">Attenzione, libro NON inserito.</div>
     <div role="alert" class="alert alert-success" *ngIf="successAlert">Inserimento libro completato.</div>
-    <button type="submit" class="btn btn-dark" [disabled]="!inserimForm.valid">Salva libro</button>
+    <button type="submit" class="btn btn-dark" [disabled]="!inserimForm.valid || successAlert">Salva libro</button>
   </form>
 </div>

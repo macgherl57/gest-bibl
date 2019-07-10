@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Rivista } from 'src/app/riviste';
+import { Rivista } from '../../riviste';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -15,6 +15,13 @@ export class GestisciRivChildComponent implements OnInit {
   titolo: string;
   @Output()
   whatever: EventEmitter<number> = new EventEmitter<number>();
+  public anno: string;
+  public periodicita: string;
+  public annata: number;
+  public numero_fasc: number;
+  public data_di_arrivo: Date;
+  public note: string;
+  public manca: string;
 
   constructor(private apiService: ApiService) { }
 
