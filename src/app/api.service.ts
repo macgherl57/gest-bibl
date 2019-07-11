@@ -13,7 +13,7 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient, private sessionService: AuthsessService) { }
   
-  API_URL = 'http://localhost:3000/biblioteca';
+  API_URL = 'http://127.0.0.1:3000/biblioteca';
   public isUserLoggedIn = new BehaviorSubject<Boolean>(false);
   public libriSearch = new BehaviorSubject<Libro[]>([]);
   public currentPage = new BehaviorSubject<number>(0);

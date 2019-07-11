@@ -3,7 +3,7 @@ version: '3.7' # specify docker-compose version
 services:
   angular: # name of the first service
     hostname: localhost
-    image: machgherl/gest-bibl-angular:0.1
+    image: macgherl/gest-bibl-angular-new:0.1
     ports:
       - "8181:80" # specify port forwarding
   express: #name of the second service
